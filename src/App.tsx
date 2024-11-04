@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import './App.css';
 import { PicketSign } from './components/PicketSign';
+import { SignContent } from './types';
 
-const CARD_VALUES = [
-  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-];
+
+const CARD_VALUES = Object.values(SignContent).filter(val => typeof val === 'number')
+console.log(CARD_VALUES);
 
 interface Card {
   id: number;
-  value: string;
+  value: SignContent;
 }
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
     <div id='game'>
       {cards.map(card => (
         <div className='card' key={card.id}>
-            <PicketSign text={card.value} />
+            <PicketSign content={card.value} />
         </div>
       ))}
     </div>
