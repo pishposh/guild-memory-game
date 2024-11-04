@@ -2,8 +2,15 @@ import { useEffect, useMemo, useState } from 'react';
 import { SignContent } from '../../types';
 import './PicketSign.css';
 
-export const PicketSign = ({ content }: { content: SignContent }) => {
-  const [flipped, setFlipped] = useState(true);
+export const PicketSign = ({
+  content,
+  flipped,
+  onClick
+}: {
+  content: SignContent;
+  flipped: boolean;
+  onClick: () => void;
+}) => {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
@@ -21,7 +28,7 @@ export const PicketSign = ({ content }: { content: SignContent }) => {
   const imageSrc = useMemo(() => `/assets/sign-content/${content}`, [content]);
 
   return (
-    <div className={containerClass} onClick={() => setFlipped(!flipped)}>
+    <div className={containerClass} onClick={() => onClick()}>
       <div className="front-container">
         <div className="sign-post">
           <img

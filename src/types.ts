@@ -6,3 +6,8 @@ export enum SignContent {
   MakerWeekGuild = 'maker-week-guild.png',
   UnionMadeGithub = 'union-made-github.png'
 }
+
+export type Card = {
+  id: number;
+  value: SignContent;
+};

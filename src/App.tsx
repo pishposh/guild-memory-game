@@ -1,49 +1,28 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import './App.css';
 import { PicketSign } from './components/PicketSign';
-import { SignContent } from './types';
-
-
-const CARD_VALUES = Object.values(SignContent)
-
-interface Card {
-  id: number;
-  value: SignContent;
-}
+import { MatcherContext } from './contexts/matcher';
 
 function App() {
-  const [cards, setCards] = useState<Card[]>(getInitialCards());
+  const { hasMatch, flipCard, checkFlipped, cards, reset } =
+    useContext(MatcherContext);
+  if (hasMatch) {
+    setTimeout(() => reset(), 5000);
+  }
 
   return (
-    <div id='game'>
-      {cards.map(card => (
-        <div className='card' key={card.id}>
-            <PicketSign content={card.value} />
+    <div id="game">
+      {cards.map((card) => (
+        <div className="card" key={card.id}>
+          <PicketSign
+            content={card.value}
+            onClick={() => flipCard(card)}
+            flipped={!checkFlipped(card.id)}
+          />
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 export default App;
-
-function getInitialCards() {
-  const initialCards = [...CARD_VALUES, ...CARD_VALUES].map((value, id) => ({ value, id }));
-  
-  // https://stackoverflow.com/questions/48083353/i-want-to-know-how-to-shuffle-an-array-in-typescript
-  let currentIndex = initialCards.length, randomIndex;
-
-  // While there remain elements to shuffle.
-  while (currentIndex != 0) {
-
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [initialCards[currentIndex], initialCards[randomIndex]] = [
-      initialCards[randomIndex], initialCards[currentIndex]];
-  }
-
-  return initialCards;
-}
