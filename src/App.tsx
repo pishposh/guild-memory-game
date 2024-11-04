@@ -1,42 +1,27 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
+const CARD_VALUES = [
+  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+];
+
+interface Card {
+  id: number;
+  value: string;
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [cards, setCards] = useState<Card[]>([...CARD_VALUES, ...CARD_VALUES].map((value, id) => ({ value, id })));
 
   return (
-    <>
-      {/* a 4x4 grid of rectangular divs that each take 25% of the screen */}
-      <table>
-        <tr>
-          <td>X</td>
-          <td>X</td>
-          <td>X</td>
-          <td>X</td>
-        </tr>
-        <tr>
-          <td>X</td>
-          <td>X</td>
-          <td>X</td>
-          <td>X</td>
-        </tr>
-        <tr>
-          <td>X</td>
-          <td>X</td>
-          <td>X</td>
-          <td>X</td>
-        </tr>
-        <tr>
-          <td>X</td>
-          <td>X</td>
-          <td>X</td>
-          <td>X</td>
-        </tr>
-      </table>
-    </>
+    <div id='game'>
+      {cards.map(card => (
+        <div className='card' key={card.id}>
+            {card.value}
+        </div>
+      ))}
+    </div>
   )
 }
 
-export default App
+export default App;
