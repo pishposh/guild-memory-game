@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 div#game {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -5,7 +9,7 @@ div#game {
 
   gap: 10px;
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
 }
 
 .card {
@@ -15,4 +19,17 @@ div#game {
   justify-content: center;
   font-size: 24px;
   cursor: pointer;
+}
+
+.scoreboard {
+  display: block;
+  width: 100%;
+  padding: 20px
+}
+
+.scoreboard .row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
