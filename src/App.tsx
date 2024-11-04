@@ -11,7 +11,7 @@ interface Card {
 }
 
 function App() {
-  const [cards, setCards] = useState<Card[]>([...CARD_VALUES, ...CARD_VALUES].shuffled().map((value, id) => ({ value, id })));
+  const [cards, setCards] = useState<Card[]>(getInitialCards());
 
   return (
     <div id='game'>
@@ -26,28 +26,23 @@ function App() {
 
 export default App;
 
-declare global {
-  interface Array<T> {
-    shuffled(): Array<T>;
-  }
-}
-
-if (!Array.prototype.shuffled) {
+function getInitialCards() {
+  const initialCards = [...CARD_VALUES, ...CARD_VALUES].map((value, id) => ({ value, id }));
+  
   // https://stackoverflow.com/questions/48083353/i-want-to-know-how-to-shuffle-an-array-in-typescript
-  Array.prototype.shuffled = function<T>(this: T[]): T[] {
-    let currentIndex = this.length,  randomIndex;
+  let currentIndex = initialCards.length, randomIndex;
 
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
 
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
 
-      // And swap it with the current element.
-      [this[currentIndex], this[randomIndex]] = [
-        this[randomIndex], this[currentIndex]];
-    }
-    return this;
+    // And swap it with the current element.
+    [initialCards[currentIndex], initialCards[randomIndex]] = [
+      initialCards[randomIndex], initialCards[currentIndex]];
   }
+
+  return initialCards;
 }
