@@ -28,7 +28,7 @@ function App() {
     <>
       <div id='game'>
         {cards.map(card => (
-          <div className='card' key={card.id}>
+          <div className='card' key={card.id} onClick={() => setGame(game.handleClick())}>
               {card.value}
           </div>
         ))}
