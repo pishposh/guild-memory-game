@@ -43,4 +43,6 @@ function getInitialCards() {
     [initialCards[currentIndex], initialCards[randomIndex]] = [
       initialCards[randomIndex], initialCards[currentIndex]];
   }
+
+  return initialCards;
 }
