@@ -58,8 +58,7 @@ img.sign-image {
   bottom: 23%;
   left: 5%;
   right: 5%;
-  color: rgb(239 68 68);
-  object-fit:contain;
+  object-fit: contain;
 }
 
 img.content {

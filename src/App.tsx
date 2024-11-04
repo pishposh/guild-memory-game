@@ -4,8 +4,7 @@ import { PicketSign } from './components/PicketSign';
 import { SignContent } from './types';
 
 
-const CARD_VALUES = Object.values(SignContent).filter(val => typeof val === 'number')
-console.log(CARD_VALUES);
+const CARD_VALUES = Object.values(SignContent)
 
 interface Card {
   id: number;
