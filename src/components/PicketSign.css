@@ -1,0 +1,68 @@
+.container {
+  height: 200px;
+  width: 200px;
+
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+
+  transform-style: preserve-3d;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.front-container,
+.back-container {
+  backface-visibility: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.back-container {
+  transform: rotateY(180deg);
+}
+
+.sign-container {
+  backface-visibility: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.sign-post {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+img {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  top: 0px;
+  left: 0px;
+}
+
+.text-container {
+  position: absolute;
+  top: 16%;
+  bottom: 22%;
+  left: 5%;
+  right: 5%;
+  color: rgb(239 68 68);
+}
+
+.text-container > div {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}

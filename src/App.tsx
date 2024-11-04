@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import { PicketSign } from './components/PicketSign';
 
 const CARD_VALUES = [
   'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -17,7 +18,7 @@ function App() {
     <div id='game'>
       {cards.map(card => (
         <div className='card' key={card.id}>
-            {card.value}
+            <PicketSign text={card.value} />
         </div>
       ))}
     </div>
