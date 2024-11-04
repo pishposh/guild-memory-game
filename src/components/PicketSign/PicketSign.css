@@ -1,6 +1,11 @@
+* {
+  --sign-size: max(100%, 200px);
+  --content-size: max(100%, 120px);
+}
+
 .container {
-  height: 200px;
-  width: 200px;
+  height: var(--sign-size);
+  width: var(--sign-size);
 
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -38,31 +43,31 @@
   position: relative;
 }
 
-img {
+img.sign-image {
+  object-fit: contain;
   position: absolute;
-  height: 200px;
-  width: 200px;
+  height: var(--sign-size);
+  width: var(--sign-size);
   top: 0px;
   left: 0px;
 }
 
-.text-container {
+.content-container {
   position: absolute;
-  top: 16%;
-  bottom: 22%;
+  top: 17%;
+  bottom: 23%;
   left: 5%;
   right: 5%;
-  color: rgb(239 68 68);
+  object-fit: contain;
 }
 
-.text-container > div {
-  height: 100%;
+img.content {
+  height: var(--content-size);
   width: 100%;
-  text-align: center;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+  object-fit: contain;
+  z-index: 10;
+}
+
+.transparent {
+  opacity: 0;
 }
