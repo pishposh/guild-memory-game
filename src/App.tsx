@@ -27,14 +27,22 @@ function App() {
   const [cards, setCards] = useState<Card[]>(getInitialCards());
 
   function handleFlip(id: number) {
-
+    const newCards = cards.map(
+      card => (card.id === id) ? { ...card, isFlipped: true } : card
+    );
+    setCards(newCards);
   }
 
   return (
     <div id='game'>
       {cards.map(card => (
-        <div className='card' key={card.id} onClick={() => handleFlip(card.id)}>
+        <div className='card' key={card.id} onClick={() => handleFlip(card.id)} style={{ position: 'relative' }}>
+          <div className='back' style={{width: '100%', height: '100%', background: 'teal'}}>
+            ?
+          </div>
+          <div className='front' style={{width: '100%', height: '100%'}}>
             {card.value}
+          </div>
         </div>
       ))}
     </div>
