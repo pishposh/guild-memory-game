@@ -17,7 +17,7 @@ function App() {
     <div id='game'>
       {cards.map(card => (
         <div className='card' key={card.id}>
-            {card.value}
+            <img src="src/assets/picket-sign/picket-sign-flipped.png" className='picket'/>
         </div>
       ))}
     </div>
