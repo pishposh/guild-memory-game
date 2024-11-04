@@ -7,16 +7,33 @@ const CARD_VALUES = [
 
 interface Card {
   id: number;
-  value: string;
+  value: string; // card face
+  isFlipped: boolean;
+}
+
+function getInitialCards() {
+  const initialCards = [...CARD_VALUES, ...CARD_VALUES].map(
+    (value, id) => ({
+      value,
+      id,
+      isFlipped: false // start out face down
+    })
+  );
+  return initialCards;
 }
 
 function App() {
-  const [cards, setCards] = useState<Card[]>([...CARD_VALUES, ...CARD_VALUES].map((value, id) => ({ value, id })));
+  // initial card state:
+  const [cards, setCards] = useState<Card[]>(getInitialCards());
+
+  function handleFlip(id: number) {
+
+  }
 
   return (
     <div id='game'>
       {cards.map(card => (
-        <div className='card' key={card.id}>
+        <div className='card' key={card.id} onClick={() => handleFlip(card.id)}>
             {card.value}
         </div>
       ))}
