@@ -4,5 +4,5 @@ export enum SignContent {
   GuildSquare = 'guild-logo-square.png',
   JustCauseWordle = 'just-cause-wordle.png',
   MakerWeekGuild = 'maker-week-guild.png',
-  UnionMadeGithub = 'union-made-github.png'
+  UnionMadeGithub = 'union-made-github.png',
 }

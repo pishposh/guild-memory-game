@@ -1,24 +1,24 @@
-import { useEffect, useMemo, useState } from 'react';
-import { SignContent } from '../../types';
-import './PicketSign.css';
+import { useEffect, useMemo, useState } from 'react'
+import { SignContent } from '../../types'
+import './PicketSign.css'
 
 export const PicketSign = ({ content }: { content: SignContent }) => {
-  const [flipped, setFlipped] = useState(true);
-  const [showContent, setShowContent] = useState(false);
+  const [flipped, setFlipped] = useState(true)
+  const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => setShowContent(true), 1000);
-  }, []);
+    setTimeout(() => setShowContent(true), 1000)
+  }, [])
 
   const containerClass = useMemo(
     () => (flipped ? 'container flipped' : 'container'),
-    [flipped]
-  );
+    [flipped],
+  )
   const contentClass = useMemo(
     () => (showContent ? 'content' : 'content transparent'),
-    [showContent]
-  );
-  const imageSrc = useMemo(() => `/assets/sign-content/${content}`, [content]);
+    [showContent],
+  )
+  const imageSrc = useMemo(() => `/assets/sign-content/${content}`, [content])
 
   return (
     <div className={containerClass} onClick={() => setFlipped(!flipped)}>
@@ -40,5 +40,5 @@ export const PicketSign = ({ content }: { content: SignContent }) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
