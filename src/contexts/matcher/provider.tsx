@@ -35,9 +35,11 @@ export const MatcherProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(reducer, []);
   const [canReveal, setCanReveal] = useState(true);
 
+  const clear = useCallback(() => dispatch({ type: 'reset' }), [dispatch]);
+
   const reset = () => {
     setCanReveal(false);
-    dispatch({ type: 'reset' });
+    clear();
     setTimeout(() => {
       setBaseCards(shuffleCards());
       setCanReveal(true);
@@ -63,6 +65,19 @@ export const MatcherProvider = ({ children }: PropsWithChildren) => {
     },
     [dispatch, hasMatch, canReveal]
   );
+
+  const [timeoutId, setTimeoutId] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!hasMatch && state.length === 2) {
+      setTimeoutId(setTimeout(clear, 2000));
+    } else {
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clear, hasMatch, state]);
 
   const cards = useMemo(() => {
     const revealedIds = state.map((c) => c.id);
