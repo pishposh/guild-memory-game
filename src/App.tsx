@@ -62,6 +62,8 @@ function App() {
       return;
     }
 
+    setGame(game.handleClick());
+
     // flip the card face-up:
     const newCards = cards.map((c) =>
       c.id === card.id ? { ...c, isFaceUp: true } : c
@@ -77,10 +79,7 @@ function App() {
             <div
               className="card"
               key={card.id}
-              onClick={() => {
-                setGame(game.handleClick());
-                handleCardClick(card);
-              }}
+              onClick={() => handleCardClick(card)}
             >
               <PicketSign card={card} />
             </div>
@@ -94,7 +93,7 @@ function App() {
           </p>
           <div className="row">
             <p className="attempts">
-              <strong>Cards flipped:</strong> {game.getAttempts()}
+              <strong>Picket signs flipped:</strong> {game.getAttempts()}
             </p>
             <p className="score">
               <strong>Matches:</strong> {game.getScore()}
