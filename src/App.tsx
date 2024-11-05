@@ -1,17 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
-import './App.css'
-import { PicketSign } from './components/PicketSign'
-import { Game, NewGame } from './game'
-import { SignContent } from './types'
+import { useEffect, useMemo, useState } from 'react';
+import './App.css';
+import { PicketSign } from './components/PicketSign';
+import { Game, NewGame } from './game';
+import { Card, SignContent } from './types';
 
 const CARD_VALUES = Object.values(SignContent)
-
-interface Card {
-  id: number
-  value: SignContent
-  isFaceUp: boolean
-  isMatched: boolean
-}
 
 function App() {
   const [cards, setCards] = useState<Card[]>(getInitialCards())
@@ -84,7 +77,7 @@ function App() {
                 handleCardClick(card)
               }}
             >
-              <PicketSign content={card.value} isFaceUp={card.isFaceUp} />
+              <PicketSign card={card} />
             </div>
           ))}
         </div>

@@ -5,4 +5,12 @@ export enum SignContent {
   JustCauseWordle = 'just-cause-wordle.png',
   MakerWeekGuild = 'maker-week-guild.png',
   UnionMadeGithub = 'union-made-github.png',
+  WuerkerCartoon = 'wuerker-cartoon.jpg'
+}
+
+export interface Card {
+  id: number;
+  value: SignContent;
+  isFaceUp: boolean;
+  isMatched: boolean;
 }
