@@ -7,12 +7,12 @@ import {
   useState
 } from 'react';
 import { MatcherContext } from '.';
-import { Card } from '../../types';
+import { BaseCard, Card } from '../../types';
 import { shuffleCards } from './shuffle';
 
 function reducer(
-  state: Card[],
-  action: { type: 'reveal'; value: Card } | { type: 'reset' }
+  state: BaseCard[],
+  action: { type: 'reveal'; value: BaseCard } | { type: 'reset' }
 ) {
   switch (action.type) {
     case 'reset':
@@ -31,11 +31,17 @@ function reducer(
 }
 
 export const MatcherProvider = ({ children }: PropsWithChildren) => {
-  const [cards, setCards] = useState<Card[]>([]);
+  const [baseCards, setBaseCards] = useState<BaseCard[]>([]);
   const [state, dispatch] = useReducer(reducer, []);
+  const [canReveal, setCanReveal] = useState(true);
+
   const reset = () => {
+    setCanReveal(false);
     dispatch({ type: 'reset' });
-    setTimeout(() => setCards(shuffleCards()), 1000);
+    setTimeout(() => {
+      setBaseCards(shuffleCards());
+      setCanReveal(true);
+    }, 1000);
   };
 
   useEffect(() => reset(), []);
@@ -46,27 +52,28 @@ export const MatcherProvider = ({ children }: PropsWithChildren) => {
   );
 
   const revealCard = useCallback(
-    (card: Card) => {
-      if (hasMatch) {
+    ({ id, value }: Card) => {
+      if (hasMatch || !canReveal) {
         return;
       }
       dispatch({
         type: 'reveal',
-        value: card
+        value: { id, value }
       });
     },
-    [dispatch, hasMatch]
+    [dispatch, hasMatch, canReveal]
   );
 
-  const checkRevealed = useCallback(
-    (id: number) => state.map((c) => c.id).includes(id),
-    [state]
-  );
+  const cards = useMemo(() => {
+    const revealedIds = state.map((c) => c.id);
+    return baseCards.map((card) => ({
+      ...card,
+      revealed: revealedIds.includes(card.id)
+    }));
+  }, [baseCards, state]);
 
   return (
-    <MatcherContext.Provider
-      value={{ cards, hasMatch, revealCard, checkRevealed, reset }}
-    >
+    <MatcherContext.Provider value={{ cards, hasMatch, revealCard, reset }}>
       {children}
     </MatcherContext.Provider>
   );

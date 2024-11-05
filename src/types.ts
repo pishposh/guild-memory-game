@@ -7,7 +7,10 @@ export enum SignContent {
   UnionMadeGithub = 'union-made-github.png'
 }
 
-export type Card = {
+export type BaseCard = {
   id: number;
   value: SignContent;
+};
+export type Card = BaseCard & {
+  revealed: boolean;
 };

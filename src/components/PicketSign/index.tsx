@@ -1,56 +1,51 @@
+import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
-import { SignContent } from '../../types';
+import { Card } from '../../types';
 import './PicketSign.css';
 
 export const PicketSign = ({
-  content,
-  revealed,
+  card,
   onClick
 }: {
-  content: SignContent;
-  revealed: boolean;
+  card: Card;
   onClick: () => void;
 }) => {
-  const [showContent, setShowContent] = useState(false);
+  const [hideContent, setHideContent] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setShowContent(true), 1000);
+    setTimeout(() => setHideContent(false), 1000);
   }, []);
 
-  const containerClass = useMemo(
-    () => (revealed ? 'container revealed' : 'container'),
-    [revealed]
+  const imageSrc = useMemo(
+    () => `/assets/sign-content/${card.value}`,
+    [card.value]
   );
-  const contentClass = useMemo(
-    () => (showContent ? 'content' : 'content transparent'),
-    [showContent]
-  );
-  const imageSrc = useMemo(() => `/assets/sign-content/${content}`, [content]);
 
   return (
-    <div className={containerClass} onClick={() => onClick()}>
-      <div className="front-container">
-        <div className="sign-post">
-          <img
-            className="sign-image"
-            src="/assets/picket-sign/picket-sign-front.png"
-          />
-          <div className="content-container">
-            <img
-              className={contentClass}
-              src={imageSrc}
-              alt={content}
-              onDragStart={(e) => e.preventDefault()}
-            />
-          </div>
-        </div>
-      </div>
+    <div
+      className={clsx('container', card.revealed && 'revealed')}
+      onClick={() => onClick()}
+    >
       <div className="back-container">
         <img
           className="sign-image"
           src="/assets/picket-sign/picket-sign-back.png"
           onDragStart={(e) => e.preventDefault()}
         />
+      </div>
+      <div className="front-container">
+        <img
+          className="sign-image"
+          src="/assets/picket-sign/picket-sign-front.png"
+        />
+        <div className="content-container">
+          <img
+            className={clsx('content', hideContent && 'transparent')}
+            src={imageSrc}
+            alt={card.value}
+            onDragStart={(e) => e.preventDefault()}
+          />
+        </div>
       </div>
     </div>
   );
