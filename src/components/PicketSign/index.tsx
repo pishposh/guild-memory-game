@@ -27,9 +27,15 @@ export const PicketSign = ({ content }: { content: SignContent }) => {
           <img
             className="sign-image"
             src="/assets/picket-sign/picket-sign.png"
+            onDragStart={(e) => e.preventDefault()}
           />
           <div className="content-container">
-            <img className={contentClass} src={imageSrc} alt={content} />
+            <img
+              className={contentClass}
+              src={imageSrc}
+              alt={content}
+              onDragStart={(e) => e.preventDefault()}
+            />
           </div>
         </div>
       </div>
@@ -37,6 +43,7 @@ export const PicketSign = ({ content }: { content: SignContent }) => {
         <img
           className="sign-image"
           src="/assets/picket-sign/picket-sign-flipped.png"
+          onDragStart={(e) => e.preventDefault()}
         />
       </div>
     </div>
