@@ -14,7 +14,12 @@
   transform-style: preserve-3d;
 }
 
-.face-down {
+.matched {
+  opacity: 0.5;
+  transition: opacity 1s linear;
+}
+
+.face-up {
   transform: rotateY(180deg);
 }
 

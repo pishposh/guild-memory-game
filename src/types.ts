@@ -7,3 +7,10 @@ export enum SignContent {
   UnionMadeGithub = 'union-made-github.png',
   WuerkerCartoon = 'wuerker-cartoon.jpg'
 }
+
+export interface Card {
+  id: number;
+  value: SignContent;
+  isFaceUp: boolean;
+  isMatched: boolean;
+}
