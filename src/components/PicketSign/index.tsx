@@ -22,7 +22,7 @@ export const PicketSign = ({ card }: { card: Card }) => {
         <div className="back-container">
           <img
             className="sign-image"
-            src="assets/picket-sign/picket-sign-face-down.png"
+            src="assets/picket-sign/picket-sign-face-down.webp"
             onDragStart={(e) => e.preventDefault()}
           />
         </div>
@@ -30,7 +30,7 @@ export const PicketSign = ({ card }: { card: Card }) => {
       <div className={clsx('front-container', matched && 'matched')}>
         <img
           className="sign-image"
-          src="assets/picket-sign/picket-sign-face-up.png"
+          src="assets/picket-sign/picket-sign-face-up.webp"
           onDragStart={(e) => e.preventDefault()}
         />
         <div className="content-container">

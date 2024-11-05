@@ -1,11 +1,12 @@
 export enum SignContent {
-  ContractSpellingBee = 'contract-spelling-bee.png',
-  GuildRound = 'guild-logo-round.png',
-  GuildSquare = 'guild-logo-square.png',
-  JustCauseWordle = 'just-cause-wordle.png',
-  MakerWeekGuild = 'maker-week-guild.png',
-  UnionMadeGithub = 'union-made-github.png',
-  WuerkerCartoon = 'wuerker-cartoon.jpg'
+  ContractSpellingBee = 'contract-spelling-bee.webp',
+  GuildRound = 'guild-logo-round.webp',
+  GuildSquare = 'guild-logo-square.webp',
+  JustCauseWordle = 'just-cause-wordle.webp',
+  MakerWeekGuild = 'maker-week-guild.webp',
+  UnionMadeGithub = 'union-made-github.webp',
+  WuerkerCartoon = 'wuerker-cartoon.webp',
+  ContractCrossword = 'contract-crossword.webp'
 }
 
 export interface Card {
