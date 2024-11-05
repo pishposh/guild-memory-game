@@ -62,6 +62,8 @@ function App() {
       return;
     }
 
+    setGame(game.handleClick());
+
     // flip the card face-up:
     const newCards = cards.map((c) =>
       c.id === card.id ? { ...c, isFaceUp: true } : c
@@ -78,7 +80,6 @@ function App() {
               className="card"
               key={card.id}
               onClick={() => {
-                setGame(game.handleClick());
                 handleCardClick(card);
               }}
             >
