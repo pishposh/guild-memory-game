@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import { PicketSign } from './components/PicketSign';
 import { Game, NewGame } from './game';
@@ -11,9 +11,14 @@ function App() {
   const [game, setGame] = useState<Game>(NewGame());
   const [duration, setDuration] = useState('0m 0s');
 
+  const gameRef = useRef<Game>();
+  gameRef.current = game;
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setDuration(game.getDuration());
+      if (gameRef.current) {
+        setDuration(gameRef.current.getDuration());
+      }
     }, 1000);
 
     return () => clearInterval(interval);
