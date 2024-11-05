@@ -16,9 +16,15 @@ export const PicketSign = ({ content, isFaceUp }: { content: SignContent, isFace
           <img
             className="sign-image"
             src="/assets/picket-sign/picket-sign-face-up.png"
+            onDragStart={(e) => e.preventDefault()}
           />
           <div className="content-container">
-            <img className="content" src={imageSrc} alt={content} />
+            <img
+              className="content"
+              src={imageSrc}
+              alt={content}
+              onDragStart={(e) => e.preventDefault()}
+            />
           </div>
         </div>
       </div>
@@ -26,6 +32,7 @@ export const PicketSign = ({ content, isFaceUp }: { content: SignContent, isFace
         <img
           className="sign-image"
           src="/assets/picket-sign/picket-sign-face-down.png"
+          onDragStart={(e) => e.preventDefault()}
         />
       </div>
     </div>
