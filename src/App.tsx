@@ -7,7 +7,7 @@ function App() {
   const { hasMatch, revealCard, checkRevealed, cards, reset } =
     useContext(MatcherContext);
   if (hasMatch) {
-    setTimeout(() => reset(), 5000);
+    setTimeout(reset, 5000);
   }
 
   return (

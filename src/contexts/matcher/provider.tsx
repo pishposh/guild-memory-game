@@ -40,19 +40,22 @@ export const MatcherProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => reset(), []);
 
+  const hasMatch = useMemo(
+    () => state.length === 2 && state[0].value === state[1].value,
+    [state]
+  );
+
   const revealCard = useCallback(
     (card: Card) => {
+      if (hasMatch) {
+        return;
+      }
       dispatch({
         type: 'reveal',
         value: card
       });
     },
-    [dispatch]
-  );
-
-  const hasMatch = useMemo(
-    () => state.length === 2 && state[0].value === state[1].value,
-    [state]
+    [dispatch, hasMatch]
   );
 
   const checkRevealed = useCallback(
