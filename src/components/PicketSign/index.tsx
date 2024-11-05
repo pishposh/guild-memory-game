@@ -36,7 +36,12 @@ export const PicketSign = ({
             src="/assets/picket-sign/picket-sign-front.png"
           />
           <div className="content-container">
-            <img className={contentClass} src={imageSrc} alt={content} />
+            <img
+              className={contentClass}
+              src={imageSrc}
+              alt={content}
+              onDragStart={(e) => e.preventDefault()}
+            />
           </div>
         </div>
       </div>
@@ -44,6 +49,7 @@ export const PicketSign = ({
         <img
           className="sign-image"
           src="/assets/picket-sign/picket-sign-back.png"
+          onDragStart={(e) => e.preventDefault()}
         />
       </div>
     </div>
