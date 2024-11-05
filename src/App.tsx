@@ -79,9 +79,7 @@ function App() {
             <div
               className="card"
               key={card.id}
-              onClick={() => {
-                handleCardClick(card);
-              }}
+              onClick={() => handleCardClick(card)}
             >
               <PicketSign card={card} />
             </div>
@@ -95,7 +93,7 @@ function App() {
           </p>
           <div className="row">
             <p className="attempts">
-              <strong>Cards flipped:</strong> {game.getAttempts()}
+              <strong>Picket signs flipped:</strong> {game.getAttempts()}
             </p>
             <p className="score">
               <strong>Matches:</strong> {game.getScore()}
