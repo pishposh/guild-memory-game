@@ -1,7 +1,7 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './App.css';
-import { Game, NewGame } from './game';
 import { PicketSign } from './components/PicketSign';
+import { Game, NewGame } from './game';
 import { SignContent } from './types';
 
 const CARD_VALUES = Object.values(SignContent);
@@ -16,11 +16,11 @@ interface Card {
 function App() {
   const [cards, setCards] = useState<Card[]>(getInitialCards());
   const [game, setGame] = useState<Game>(NewGame());
-  const [duration, setDuration] = useState("0m 0s");
+  const [duration, setDuration] = useState('0m 0s');
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDuration(game.getDuration())
+      setDuration(game.getDuration());
     }, 1000);
 
     return () => clearInterval(interval);
@@ -73,35 +73,39 @@ function App() {
 
   return (
     <>
-      <div id='game'>
-        {cards.map(card => (
-          <div
-            className="card"
-            key={card.id}
-            onClick={() => {
-              setGame(game.handleClick());
-              handleCardClick(card);
-            }}
-          >
-            <PicketSign content={card.value} isFaceUp={card.isFaceUp} />
-          </div>
-        ))}
+      <div id="game-container">
+        <div id="game">
+          {cards.map((card) => (
+            <div
+              className="card"
+              key={card.id}
+              onClick={() => {
+                setGame(game.handleClick());
+                handleCardClick(card);
+              }}
+            >
+              <PicketSign content={card.value} isFaceUp={card.isFaceUp} />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="scoreboard">
-        <p className="time">
-          <strong>Time spent:</strong> {duration}
-        </p>
-        <div className="row">
-          <p className="attempts">
-            <strong>Cards flipped:</strong> {game.getAttempts()}
+      <div className="scoreboard-container">
+        <div className="scoreboard">
+          <p className="time">
+            <strong>Time spent:</strong> {duration}
           </p>
-          <p className="score">
-            <strong>Matches:</strong> {game.getScore()}
-          </p>
+          <div className="row">
+            <p className="attempts">
+              <strong>Cards flipped:</strong> {game.getAttempts()}
+            </p>
+            <p className="score">
+              <strong>Matches:</strong> {game.getScore()}
+            </p>
+          </div>
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default App;
