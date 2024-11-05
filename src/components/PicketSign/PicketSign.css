@@ -14,7 +14,7 @@
   transform-style: preserve-3d;
 }
 
-.flipped {
+.revealed {
   transform: rotateY(180deg);
 }
 

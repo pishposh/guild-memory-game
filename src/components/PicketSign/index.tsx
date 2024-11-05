@@ -4,11 +4,11 @@ import './PicketSign.css';
 
 export const PicketSign = ({
   content,
-  flipped,
+  revealed,
   onClick
 }: {
   content: SignContent;
-  flipped: boolean;
+  revealed: boolean;
   onClick: () => void;
 }) => {
   const [showContent, setShowContent] = useState(false);
@@ -18,8 +18,8 @@ export const PicketSign = ({
   }, []);
 
   const containerClass = useMemo(
-    () => (flipped ? 'container flipped' : 'container'),
-    [flipped]
+    () => (revealed ? 'container revealed' : 'container'),
+    [revealed]
   );
   const contentClass = useMemo(
     () => (showContent ? 'content' : 'content transparent'),
@@ -33,7 +33,7 @@ export const PicketSign = ({
         <div className="sign-post">
           <img
             className="sign-image"
-            src="/assets/picket-sign/picket-sign.png"
+            src="/assets/picket-sign/picket-sign-front.png"
           />
           <div className="content-container">
             <img className={contentClass} src={imageSrc} alt={content} />
@@ -43,7 +43,7 @@ export const PicketSign = ({
       <div className="back-container">
         <img
           className="sign-image"
-          src="/assets/picket-sign/picket-sign-flipped.png"
+          src="/assets/picket-sign/picket-sign-back.png"
         />
       </div>
     </div>

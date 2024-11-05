@@ -12,12 +12,12 @@ import { shuffleCards } from './shuffle';
 
 function reducer(
   state: Card[],
-  action: { type: 'flip'; value: Card } | { type: 'reset' }
+  action: { type: 'reveal'; value: Card } | { type: 'reset' }
 ) {
   switch (action.type) {
     case 'reset':
       return [];
-    case 'flip': {
+    case 'reveal': {
       const newCard = action.value;
       if (state.length === 2) {
         if (state.map((c) => c.id).includes(newCard.id)) {
@@ -40,10 +40,10 @@ export const MatcherProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => reset(), []);
 
-  const flipCard = useCallback(
+  const revealCard = useCallback(
     (card: Card) => {
       dispatch({
-        type: 'flip',
+        type: 'reveal',
         value: card
       });
     },
@@ -55,14 +55,14 @@ export const MatcherProvider = ({ children }: PropsWithChildren) => {
     [state]
   );
 
-  const checkFlipped = useCallback(
+  const checkRevealed = useCallback(
     (id: number) => state.map((c) => c.id).includes(id),
     [state]
   );
 
   return (
     <MatcherContext.Provider
-      value={{ cards, hasMatch, flipCard, checkFlipped, reset }}
+      value={{ cards, hasMatch, revealCard, checkRevealed, reset }}
     >
       {children}
     </MatcherContext.Provider>

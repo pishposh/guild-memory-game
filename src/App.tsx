@@ -4,7 +4,7 @@ import { PicketSign } from './components/PicketSign';
 import { MatcherContext } from './contexts/matcher';
 
 function App() {
-  const { hasMatch, flipCard, checkFlipped, cards, reset } =
+  const { hasMatch, revealCard, checkRevealed, cards, reset } =
     useContext(MatcherContext);
   if (hasMatch) {
     setTimeout(() => reset(), 5000);
@@ -16,8 +16,8 @@ function App() {
         <div className="card" key={card.id}>
           <PicketSign
             content={card.value}
-            onClick={() => flipCard(card)}
-            flipped={!checkFlipped(card.id)}
+            onClick={() => revealCard(card)}
+            revealed={!checkRevealed(card.id)}
           />
         </div>
       ))}
