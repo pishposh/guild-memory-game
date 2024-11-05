@@ -14,7 +14,7 @@
   transform-style: preserve-3d;
 }
 
-.flipped {
+.face-up {
   transform: rotateY(180deg);
 }
 
