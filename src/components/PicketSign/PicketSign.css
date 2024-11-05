@@ -14,7 +14,7 @@
   transform-style: preserve-3d;
 }
 
-.flipped {
+.face-down {
   transform: rotateY(180deg);
 }
 
@@ -26,7 +26,7 @@
   width: 100%;
 }
 
-.back-container {
+.front-container {
   transform: rotateY(180deg);
 }
 
@@ -35,12 +35,6 @@
   position: absolute;
   height: 100%;
   width: 100%;
-}
-
-.sign-post {
-  height: 100%;
-  width: 100%;
-  position: relative;
 }
 
 img.sign-image {
