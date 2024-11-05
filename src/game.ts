@@ -14,7 +14,7 @@ interface GameData {
 }
 
 const DefaultGameData = {
-    start: new Date(),
+    start: null,
     end: null,
     score: 0,
     attempts: 0,
@@ -29,6 +29,14 @@ export function NewGame(game: GameData = DefaultGameData): Game{
             });
         },
         handleClick(): Game {
+            //mark the start time after the first click
+            if (game.attempts === 0) {
+                return NewGame({
+                    ...game,
+                    start: new Date(),
+                    attempts: 1
+                })
+            }
             return NewGame({
                 ...game,
                 attempts: game.attempts + 1,
