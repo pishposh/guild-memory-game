@@ -22,5 +22,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist # The folder the action should deploy.
-          force: no # leave CNAME file in place
-          clean-exclude: pr-preview/ # don't blow away preview envs
+          force: no
+          clean-exclude: |
+            pr-preview/
+            CNAME
