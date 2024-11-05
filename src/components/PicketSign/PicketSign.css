@@ -17,6 +17,10 @@
 .matched {
   opacity: 0.5;
   transition: opacity 1s linear;
+  img {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+  }
 }
 
 .face-up {
@@ -69,4 +73,22 @@ img.content {
 
 .transparent {
   opacity: 0;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(0eg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
