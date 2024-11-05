@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import './App.css';
 import { PicketSign } from './components/PicketSign';
 import { SignContent } from './types';
@@ -15,15 +15,41 @@ interface Card {
 function App() {
   const [cards, setCards] = useState<Card[]>(getInitialCards());
 
-  const handleCardClick = (card: Card) => {
-    // do nothing if card is already face up or matched:
-    if (card.isFaceUp || card.isMatched) {
+  const faceUpCards = useMemo(
+    () => cards.filter((c) => c.isFaceUp && !c.isMatched),
+    [cards]
+  );
+
+  useEffect(() => {
+    if (faceUpCards.length !== 2) {
       return;
     }
+    const [firstCard, secondCard] = faceUpCards;
+    if (firstCard.value === secondCard.value) {
+      // cards match, mark them as matched and keep them face up:
+      setCards((cards) =>
+        cards.map((c) =>
+          c.value === firstCard.value ? { ...c, isMatched: true } : c
+        )
+      );
+    } else {
+      // cards don't match, flip them back face-down after a delay:
+      setTimeout(() => {
+        setCards((cards) =>
+          cards.map((c) =>
+            c.id === firstCard.id || c.id === secondCard.id
+              ? { ...c, isFaceUp: false }
+              : c
+          )
+        );
+      }, 1000);
+    }
+  }, [cards, faceUpCards]);
 
-    // do nothing if there's already two actively face-up cards:
-    const faceUpCards = cards.filter((c) => c.isFaceUp && !c.isMatched); // TODO: do we care about O(N) here? probably not
-    if (faceUpCards.length >= 2) {
+  const handleCardClick = (card: Card) => {
+    // do nothing if card is already face up or matched
+    // or if there's already two actively face-up cards:
+    if (card.isFaceUp || card.isMatched || faceUpCards.length >= 2) {
       return;
     }
 
@@ -32,31 +58,6 @@ function App() {
       c.id === card.id ? { ...c, isFaceUp: true } : c
     );
     setCards(newCards);
-
-    // is this the second flip, and if so is it a match for the first?
-    const newFaceUpCards = newCards.filter((c) => c.isFaceUp && !c.isMatched);
-    if (newFaceUpCards.length === 2) {
-      const [firstCard, secondCard] = newFaceUpCards;
-      if (firstCard.value === secondCard.value) {
-        // cards match, mark them as matched and keep them face up:
-        setCards(
-          newCards.map((c) =>
-            c.value === firstCard.value ? { ...c, isMatched: true } : c
-          )
-        );
-      } else {
-        // cards don't match, flip them back face-down after a delay:
-        setTimeout(() => {
-          setCards((cards) =>
-            cards.map((c) =>
-              c.id === firstCard.id || c.id === secondCard.id
-                ? { ...c, isFaceUp: false }
-                : c
-            )
-          );
-        }, 1000);
-      }
-    }
   };
 
   return (
