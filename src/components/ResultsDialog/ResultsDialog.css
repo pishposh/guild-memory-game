@@ -19,27 +19,18 @@
   cursor: pointer;
 }
 
-.move-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  row-gap: 5px;
-  font-size: large;
-}
-
-.emoji {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-}
-
-.divider {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
 .board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;
   column-gap: 20px;
   font-size: large;
+}
+
+.container {
+  justify-content: start;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }

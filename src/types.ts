@@ -9,23 +9,9 @@ export enum SignContent {
   ContractCrossword = 'contract-crossword.webp'
 }
 
-export const emojis = {
-  [SignContent.ContractSpellingBee]: '🐝',
-  [SignContent.GuildRound]: '🔴',
-  [SignContent.GuildSquare]: '🟥',
-  [SignContent.JustCauseWordle]: '🟩',
-  [SignContent.MakerWeekGuild]: '🐀',
-  [SignContent.UnionMadeGithub]: '🧰',
-  [SignContent.WuerkerCartoon]: '😦',
-  [SignContent.ContractCrossword]: '🟦'
-} as const;
-
-export type Emoji = (typeof emojis)[keyof typeof emojis];
-
 export interface Card {
   id: number;
   value: SignContent;
   isFaceUp: boolean;
   isMatched: boolean;
-  emoji: Emoji;
 }
