@@ -1,18 +1,67 @@
+* {
+  box-sizing: border-box;
+  --grid-size: repeat(4, var(--cell-size));
+  --scoreboard-width: calc(4 * var(--cell-size));
+}
+
+@media (min-width: 1600px) {
+  * {
+    --cell-size: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  * {
+    --cell-size: 25vw;
+    --scoreboard-width: 100%;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1600px) {
+  * {
+    --cell-size: min(18vw, 150px);
+  }
+}
+
+div#game-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 div#game {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: var(--grid-size);
+  grid-template-rows: var(--grid-size);
 
-  gap: 10px;
-  width: 100vw;
-  height: 100vh;
+  gap: 0px;
 }
 
 .card {
   display: flex;
-  background-color: #f0f0f0;
   align-items: center;
   justify-content: center;
   font-size: 24px;
   cursor: pointer;
+  aspect-ratio: 1 / 1;
+  padding: 0.5rem;
+}
+
+.scoreboard-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 20px;
+}
+.scoreboard {
+  display: block;
+  padding: 0 20px;
+  width: var(--scoreboard-width);
+}
+
+.scoreboard .row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
