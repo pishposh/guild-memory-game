@@ -1,6 +1,6 @@
 * {
-  --sign-size: max(100%, 200px);
-  --content-size: max(100%, 120px);
+  --sign-size: 100%;
+  --content-size: 100%;
 }
 
 .container {
