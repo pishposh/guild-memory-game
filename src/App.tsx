@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
-import './App.css';
-import { PicketSign } from './components/PicketSign';
-import { Game, NewGame } from './game';
-import { Card, SignContent } from './types';
+import { useEffect, useMemo, useState } from 'react'
+import './App.css'
+import { PicketSign } from './components/PicketSign'
+import { Game, NewGame } from './game'
+import { Card, SignContent } from './types'
 
 const CARD_VALUES = Object.values(SignContent)
 

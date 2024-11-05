@@ -1,15 +1,10 @@
-import clsx from 'clsx';
-import { useEffect, useMemo, useState } from 'react';
-import { Card } from '../../types';
-import './PicketSign.css';
+import clsx from 'clsx'
+import { useEffect, useMemo, useState } from 'react'
+import { Card } from '../../types'
+import './PicketSign.css'
 
-export const PicketSign = ({
-  card
-}: {
-  card: Card
-
-}) => {
-  const {value, isFaceUp, isMatched} = card
+export const PicketSign = ({ card }: { card: Card }) => {
+  const { value, isFaceUp, isMatched } = card
 
   const [matched, setMatched] = useState(false)
 
@@ -19,12 +14,11 @@ export const PicketSign = ({
     }
   }, [isMatched])
 
-  const imageSrc = useMemo(() => `assets/sign-content/${value}`, [value]);
+  const imageSrc = useMemo(() => `assets/sign-content/${value}`, [value])
 
   return (
     <div className={clsx('container', isFaceUp ? 'face-up' : 'face-down')}>
-      
-      {!matched &&( 
+      {!matched && (
         <div className="back-container">
           <img
             className="sign-image"
@@ -33,21 +27,21 @@ export const PicketSign = ({
           />
         </div>
       )}
-        <div className={clsx('front-container', matched && 'matched')}>
+      <div className={clsx('front-container', matched && 'matched')}>
+        <img
+          className="sign-image"
+          src="assets/picket-sign/picket-sign-face-up.png"
+          onDragStart={(e) => e.preventDefault()}
+        />
+        <div className="content-container">
           <img
-            className="sign-image"
-            src="assets/picket-sign/picket-sign-face-up.png"
+            className={clsx('content')}
+            src={imageSrc}
+            alt={value}
             onDragStart={(e) => e.preventDefault()}
           />
-          <div className="content-container">
-            <img
-              className={clsx('content')}
-              src={imageSrc}
-              alt={value}
-              onDragStart={(e) => e.preventDefault()}
-            />
-          </div>
-        </div> 
-    </div> 
-  );
-};
+        </div>
+      </div>
+    </div>
+  )
+}
