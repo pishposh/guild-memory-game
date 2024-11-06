@@ -1,21 +1,22 @@
 import { useCallback, useMemo } from 'react';
-import { Game } from '../../game';
 import './ResultsDialog.css';
 
 export const ResultsDialog = ({
   onClose,
   onReset,
   duration,
-  game
+  counts,
+  attempts
 }: {
   onClose: () => void;
   onReset: () => void;
   duration: string;
-  game: Game;
+  counts: number[];
+  attempts: number;
 }) => {
   const squares = useMemo(
-    () => game.getCounts().map((c) => (c === 1 ? '🟩' : c === 2 ? '🟨' : '🟥')),
-    [game]
+    () => counts.map((c) => (c === 1 ? '🟩' : c === 2 ? '🟨' : '🟥')),
+    [counts]
   );
 
   const resultString = useMemo(() => {
@@ -42,7 +43,7 @@ export const ResultsDialog = ({
           <strong>Time spent:</strong> {duration}
         </p>
         <p className="attempts">
-          <strong>Picket signs flipped:</strong> {game.getAttempts()}
+          <strong>Picket signs flipped:</strong> {attempts}
         </p>
 
         <div className="board">
