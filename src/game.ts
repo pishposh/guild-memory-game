@@ -17,7 +17,7 @@ interface DifficultyLevel {
     matchLength: number,
 }
 
-enum Difficulty {
+export enum Difficulty {
     EASY = 'easy',
     MEDIUM = 'medium',
     HARD = 'hard' 
