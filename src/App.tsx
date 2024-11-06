@@ -56,10 +56,9 @@ function App() {
         <a style={{cursor: "pointer"}} onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
           What’s this?
         </a>
-        <InfoDialog
-          onClose={() => setInfoDialogOpen(false)}
-          isOpen={infoDialogOpen}
-        />
+        {infoDialogOpen && (
+          <InfoDialog onClose={() => setInfoDialogOpen(false)} />
+        )}
       </div>
 
       <div id="game-container">

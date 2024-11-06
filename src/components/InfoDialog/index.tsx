@@ -1,28 +1,16 @@
-import clsx from 'clsx';
-import { useRef } from 'react';
 import './InfoDialog.css';
 
 export const InfoDialog = ({
-  isOpen,
   onClose,
 }: {
-  isOpen: boolean;
   onClose: () => void;
 }) => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
   return (
-    <dialog className={clsx('dialog', isOpen && 'show')} ref={dialogRef}>
-      <span
-        className="close-button"
-        onClick={() => {
-          dialogRef?.current?.close();
-          onClose();
-        }}
-      >
+    <dialog className="info-dialog">
+      <span className="info-close-button" onClick={onClose}>
         ❌
       </span>
-      <div className="container">
+      <div className="info-container">
 
         <h2>What’s this?</h2>
 
