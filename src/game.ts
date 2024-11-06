@@ -54,6 +54,10 @@ const DefaultGameData = {
 
 
 export function NewGame(game: GameData = DefaultGameData): Game{
+    // TODO make this into a prop that's fed into this function
+    // based on user selection from a dropdown? button?
+    const userSelectedDiffuculty = Difficulty.MEDIUM; 
+
     function getFaceUpCards(cards = game.cards): Card[] {
         return cards.filter((c) => c.isFaceUp && !c.isMatched);
     }
@@ -78,7 +82,7 @@ export function NewGame(game: GameData = DefaultGameData): Game{
                 end: null,
                 score: 0,
                 attempts: 0,
-                cards: getInitialCards(getDifficultySpec(Difficulty.EASY).numCards),
+                cards: getInitialCards(getDifficultySpec(userSelectedDiffuculty).numCards),
                 // difficulty: getDifficultySpec(Difficulty.EASY)
             })
         },
