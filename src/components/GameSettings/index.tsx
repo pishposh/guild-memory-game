@@ -11,9 +11,9 @@ export const GameSettings = ({
 }) => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>(Difficulty.EASY);
 
-  const handleChangeDifficulty = (event) => {
+  const handleChangeDifficulty = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newValue = event.target.value;
-    setSelectedDifficulty(newValue);
+    setSelectedDifficulty(newValue as Difficulty);
   };
 
   return (
