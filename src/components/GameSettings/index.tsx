@@ -1,5 +1,4 @@
-import clsx from 'clsx';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Difficulty } from '../../game';
 import './GameSettings.css';
 
@@ -10,7 +9,6 @@ export const GameSettings = ({
   onClose: () => void;
   onSave: (difficulty: Difficulty) => void;
 }) => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>(Difficulty.EASY);
 
   const handleChangeDifficulty = (event) => {
@@ -20,13 +18,7 @@ export const GameSettings = ({
 
   return (
     <dialog className="settings-dialog">
-      <span
-        className="close-button"
-        onClick={() => {
-          dialogRef?.current?.close();
-          onClose();
-        }}
-      >
+      <span className="settings-close-button" onClick={onClose}>
         ❌
       </span>
       <div className="container">
@@ -43,7 +35,6 @@ export const GameSettings = ({
         className="button"
         onClick={() => {
           onSave(selectedDifficulty);
-          dialogRef?.current?.close();
           onClose();
         }}
       >
