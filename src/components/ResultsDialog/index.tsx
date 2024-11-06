@@ -4,9 +4,13 @@ import './ResultsDialog.css';
 
 export const ResultsDialog = ({
   onClose,
+  onReset,
+  duration,
   game
 }: {
   onClose: () => void;
+  onReset: () => void;
+  duration: string;
   game: Game;
 }) => {
   const squares = useMemo(
@@ -33,19 +37,23 @@ export const ResultsDialog = ({
         ❌
       </span>
       <div className="container">
-        <h1>Congratulations!</h1>
-        <p>
-          You finished in <b>{game.getAttempts()}</b> moves
+        <h1>You ratified a contract!</h1>
+        <p className="time">
+          <strong>Time spent:</strong> {duration}
         </p>
-        <p>
-          Your game took <b>{game.getDuration()}</b>
+        <p className="attempts">
+          <strong>Picket signs flipped:</strong> {game.getAttempts()}
         </p>
+
         <div className="board">
           {squares.map((square) => (
             <span>{square}</span>
           ))}
         </div>
         <button onClick={copyResults}>Copy to Clipboard</button>
+        <button type="button" onClick={onReset}>
+          Play Again
+        </button>
       </div>
     </dialog>
   );

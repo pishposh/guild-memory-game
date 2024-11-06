@@ -1,5 +1,4 @@
 .dialog {
-  border: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -8,6 +7,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  color: var(--color);
+  background-color: var(--background-color);
+  padding: 2rem;
+  border: none;
 }
 
 .close-button {

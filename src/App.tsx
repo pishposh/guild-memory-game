@@ -70,7 +70,15 @@ function App() {
         </div>
       </div>
       {showDialog && (
-        <ResultsDialog game={game} onClose={() => setShowDialog(false)} />
+        <ResultsDialog
+          game={game}
+          onClose={() => setShowDialog(false)}
+          onReset={() => {
+            setShowDialog(false);
+            setGame(game.reset());
+          }}
+          duration={duration}
+        />
       )}
     </>
   );
