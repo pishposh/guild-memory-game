@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { InfoDialog } from './components/InfoDialog';
 import { PicketSign } from './components/PicketSign';
 import { ResultsDialog } from './components/ResultsDialog';
 import { Game, NewGame } from './game';
-import { InfoDialog } from './components/InfoDialog';
 
 function App() {
   const [game, setGame] = useState<Game>(NewGame());
@@ -50,15 +50,13 @@ function App() {
   return (
     <>
       <div id="header">
-        <a href="https://nytimesguild.org/tech/">
-          More Games
-        </a>
-        <a style={{cursor: "pointer"}} onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
+        <a href="https://nytimesguild.org/tech/">More Games</a>
+        <a
+          style={{ cursor: 'pointer' }}
+          onClick={() => setInfoDialogOpen(!infoDialogOpen)}
+        >
           What’s this?
         </a>
-        {infoDialogOpen && (
-          <InfoDialog onClose={() => setInfoDialogOpen(false)} />
-        )}
       </div>
 
       <div id="game-container">
@@ -99,6 +97,9 @@ function App() {
           }}
           duration={duration}
         />
+      )}
+      {infoDialogOpen && (
+        <InfoDialog onClose={() => setInfoDialogOpen(false)} />
       )}
     </>
   );

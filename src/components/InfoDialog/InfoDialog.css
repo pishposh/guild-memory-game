@@ -12,14 +12,6 @@
   /* align-items: center; */
 }
 
-.info-close-button {
-  z-index: 1;
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
 h2 {
   margin-top: 0;
 }

@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { Game } from '../../game';
+import { Dialog } from '../Dialog';
 import './ResultsDialog.css';
 
 export const ResultsDialog = ({
@@ -32,11 +33,8 @@ export const ResultsDialog = ({
     [resultString]
   );
   return (
-    <dialog className="dialog">
-      <span className="close-button" onClick={onClose}>
-        ❌
-      </span>
-      <div className="container">
+    <Dialog onClose={onClose} centerX centerY>
+      <div className="results-container">
         <h1>You ratified a contract!</h1>
         <p className="time">
           <strong>Time spent:</strong> {duration}
@@ -55,6 +53,6 @@ export const ResultsDialog = ({
           Play Again
         </button>
       </div>
-    </dialog>
+    </Dialog>
   );
 };
