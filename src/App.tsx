@@ -4,7 +4,7 @@ import { PicketSign } from './components/PicketSign';
 import { GameSettings } from './components/GameSettings';
 import { ResultsDialog } from './components/ResultsDialog';
 import { InfoDialog } from './components/InfoDialog';
-import { Difficulty, Game, NewGame } from './game';
+import { Game, NewGame } from './game';
 
 function App() {
   const [game, setGame] = useState<Game>(NewGame());
