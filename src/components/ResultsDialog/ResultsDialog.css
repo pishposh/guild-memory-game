@@ -1,0 +1,40 @@
+.dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--color);
+  background-color: var(--background-color);
+  padding: 2rem;
+  border: none;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 1rem;
+  width: 1rem;
+  cursor: pointer;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  column-gap: 20px;
+  font-size: large;
+}
+
+.container {
+  justify-content: start;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

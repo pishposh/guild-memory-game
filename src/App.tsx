@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { PicketSign } from './components/PicketSign';
+import { ResultsDialog } from './components/ResultsDialog';
 import { Game, NewGame } from './game';
 
 function App() {
   const [game, setGame] = useState<Game>(NewGame());
   const [duration, setDuration] = useState('0m 0s');
+  const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,8 +30,20 @@ function App() {
       if (timeout) {
         clearTimeout(timeout);
       }
-    }
+    };
   }, [game, setGame]);
+
+  useEffect(() => {
+    let timeout: number | undefined;
+    if (game.hasMatchAllCards()) {
+      timeout = setTimeout(() => setShowDialog(true), 1200);
+    }
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [game]);
 
   return (
     <>
@@ -61,30 +75,19 @@ function App() {
           </div>
         </div>
       </div>
-      {
-        game.hasMatchAllCards() &&
-        <div className="summary-container">
-          <div className="summary">
-            <h1>You ratified a contract!</h1>
-            <p className="time">
-              <strong>Time spent:</strong> {duration}
-            </p>
-            <p className="attempts">
-              <strong>Picket signs flipped:</strong> {game.getAttempts()}
-            </p>
-            <button 
-              type='button' 
-              onClick={() => setGame(game.reset())}
-            >
-              Play Again
-            </button>
-          </div>
-        </div>
-      }
+      {showDialog && (
+        <ResultsDialog
+          game={game}
+          onClose={() => setShowDialog(false)}
+          onReset={() => {
+            setShowDialog(false);
+            setGame(game.reset());
+          }}
+          duration={duration}
+        />
+      )}
     </>
   );
 }
 
 export default App;
-
-
