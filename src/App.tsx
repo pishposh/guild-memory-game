@@ -3,11 +3,13 @@ import './App.css';
 import { PicketSign } from './components/PicketSign';
 import { ResultsDialog } from './components/ResultsDialog';
 import { Game, NewGame } from './game';
+import { InfoDialog } from './components/InfoDialog';
 
 function App() {
   const [game, setGame] = useState<Game>(NewGame());
   const [duration, setDuration] = useState('0m 0s');
   const [showDialog, setShowDialog] = useState(false);
+  const [infoDialogOpen, setInfoDialogOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -47,6 +49,18 @@ function App() {
 
   return (
     <>
+      <div id="header">
+        <a href="https://nytimesguild.org/tech/">
+          More Games
+        </a>
+        <a style={{cursor: "pointer"}} onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
+          What’s this?
+        </a>
+        {infoDialogOpen && (
+          <InfoDialog onClose={() => setInfoDialogOpen(false)} />
+        )}
+      </div>
+
       <div id="game-container">
         <div id="game">
           {game.getCards().map((card) => (

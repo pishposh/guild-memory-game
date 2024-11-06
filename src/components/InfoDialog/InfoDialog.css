@@ -1,0 +1,25 @@
+.info-dialog {
+  z-index: 100;
+  overflow-y: scroll;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.info-close-button {
+  z-index: 1;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+h2 {
+  margin-top: 0;
+}

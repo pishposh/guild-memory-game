@@ -84,3 +84,14 @@ div#game {
 .summary button {
   margin-top: 1rem;
 }
+
+#header {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid gray;
+  margin-bottom: 0.5rem;
+}
+
+#header a {
+  text-decoration: underline;
+  margin-right: 1rem;
+}
