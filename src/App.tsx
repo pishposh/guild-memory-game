@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import './App.css';
+import { InfoDialog } from './components/InfoDialog';
 import { PicketSign } from './components/PicketSign';
 import { ResultsDialog } from './components/ResultsDialog';
 import { GameContext } from './contexts/gameContext';
@@ -16,6 +17,7 @@ function App() {
     duration
   } = useContext(GameContext);
   const [showDialog, setShowDialog] = useState(false);
+  const [infoDialogOpen, setInfoDialogOpen] = useState(false);
 
   useEffect(() => {
     let timeout: number | undefined;
@@ -31,6 +33,19 @@ function App() {
 
   return (
     <>
+      <div id="header">
+        <a href="https://nytimesguild.org/tech/">More Games</a>
+        <a
+          style={{ cursor: 'pointer' }}
+          onClick={() => setInfoDialogOpen(!infoDialogOpen)}
+        >
+          What’s this?
+        </a>
+        {infoDialogOpen && (
+          <InfoDialog onClose={() => setInfoDialogOpen(false)} />
+        )}
+      </div>
+
       <div id="game-container">
         <div id="game">
           {cards.map((card) => (
