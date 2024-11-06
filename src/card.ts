@@ -34,7 +34,7 @@ export function getInitialCards(): Card[] {
 }
 
 // note, sort(() => 0.5 - Math.random()) and similar are biased; see <https://stackoverflow.com/a/12646864>
-function shuffleArray(array: unknown[]) {
+function shuffleArray(array: Card[]) {
   for (let i = array.length - 1; i >= 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];

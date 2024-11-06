@@ -41,9 +41,6 @@ function App() {
         >
           What’s this?
         </a>
-        {infoDialogOpen && (
-          <InfoDialog onClose={() => setInfoDialogOpen(false)} />
-        )}
       </div>
 
       <div id="game-container">
@@ -85,6 +82,9 @@ function App() {
           }}
           duration={duration}
         />
+      )}
+      {infoDialogOpen && (
+        <InfoDialog onClose={() => setInfoDialogOpen(false)} />
       )}
     </>
   );
