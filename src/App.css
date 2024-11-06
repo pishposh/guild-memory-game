@@ -12,15 +12,23 @@
 
 @media (orientation: portrait) and (min-width: 910px) and (max-width: 1600px) {
   * {
-    --cell-size: min(22vh, 23vw);
+    --cell-size: min(23vw);
   }
 }
 
 @media (orientation: portrait) and (max-width: 910px) {
   * {
-    --cell-size: min(14vh, 33vw);
-    --grid-size: repeat(3, var(--cell-size));
-    --scoreboard-width: calc(3 * var(--cell-size));
+    --cell-size: min(23vw);
+    --grid-size: repeat(4, var(--cell-size));
+    --scoreboard-width: calc(4 * var(--cell-size));
+  }
+}
+
+@media (orientation: portrait) and (max-width: 400px) {
+  * {
+    --cell-size: 40vw;
+    --grid-size: repeat(2, var(--cell-size));
+    --scoreboard-width: calc(2 * var(--cell-size));
   }
 }
 
@@ -34,7 +42,6 @@ div#game {
   display: grid;
   grid-template-columns: var(--grid-size);
   grid-template-rows: var(--grid-size);
-
   gap: 0px;
 }
 
@@ -52,7 +59,12 @@ div#game {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding-top: 0.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+body {
+  background-color: var(--background-color)
 }
 
 .scoreboard {
