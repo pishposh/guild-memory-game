@@ -45,9 +45,8 @@ function App() {
           onClose={() => setGameSettingsOpen(false)}
           isOpen={gameSettingsOpen}
           onSave={(difficulty) => {
-            console.log("saved difficulty: ", difficulty);
-            //TODO: And reset the game with the new difficulty
-            setGame(NewGame())
+            //Reset the game with the new difficulty
+            setGame(game.resetWithDifficulty(difficulty))
           }}
         />
       </div>

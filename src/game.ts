@@ -4,6 +4,7 @@ export interface Game {
     handleClick(card: Card): Game;
     resetUnmatchedCards(): Game;
     reset(): Game;
+    resetWithDifficulty(difficulty: Difficulty): Game;
     getDuration(): string;
     getScore(): number;
     getAttempts(): number;
@@ -40,7 +41,7 @@ interface GameData {
     score: number;
     attempts: number;
     cards: Card[];
-    // difficulty: DifficultyLevel;
+    difficulty: Difficulty;
 }
 
 const DefaultGameData = {
@@ -49,14 +50,11 @@ const DefaultGameData = {
     score: 0,
     attempts: 0,
     cards: getInitialCards(getDifficultySpec(Difficulty.EASY).numCards),
-    // difficulty: getDifficultySpec(Difficulty.EASY)
+    difficulty: Difficulty.EASY
 }
 
 
-export function NewGame(game: GameData = DefaultGameData): Game{
-    // TODO make this into a prop that's fed into this function
-    // based on user selection from a dropdown? button?
-    const userSelectedDiffuculty = Difficulty.MEDIUM; 
+export function NewGame(game: GameData = DefaultGameData): Game{ 
 
     function getFaceUpCards(cards = game.cards): Card[] {
         return cards.filter((c) => c.isFaceUp && !c.isMatched);
@@ -82,8 +80,18 @@ export function NewGame(game: GameData = DefaultGameData): Game{
                 end: null,
                 score: 0,
                 attempts: 0,
-                cards: getInitialCards(getDifficultySpec(userSelectedDiffuculty).numCards),
-                // difficulty: getDifficultySpec(Difficulty.EASY)
+                cards: getInitialCards(getDifficultySpec(game.difficulty).numCards),
+                difficulty: game.difficulty
+            })
+        },
+        resetWithDifficulty(difficulty: Difficulty): Game {
+            return NewGame({
+                start: null,
+                end: null,
+                score: 0,
+                attempts: 0,
+                cards: getInitialCards(getDifficultySpec(difficulty).numCards),
+                difficulty: difficulty
             })
         },
         handleClick(card: Card): Game {
@@ -151,7 +159,6 @@ export function NewGame(game: GameData = DefaultGameData): Game{
             return game.attempts
         },
         getCards(): Card[] {
-            console.log(`returning ${game.cards.length} cards`)
             return game.cards;
         },
         hasFlippedTwoCardsWithoutMatch(): boolean {
