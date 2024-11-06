@@ -9,6 +9,7 @@ export interface Game {
   getScore(): number;
   getAttempts(): number;
   getCards(): Card[];
+  getCounts(): number[];
   hasFlippedTwoCardsWithoutMatch(): boolean;
   hasMatchAllCards(): boolean;
 }
@@ -61,7 +62,7 @@ export function NewGame(game: GameData = DefaultGameData): Game {
   }
 
   function hasFlippedTwoCards(cards = game.cards): boolean {
-    return getFaceUpCards(cards).length >= 2
+    return getFaceUpCards(cards).length >= 2;
   }
 
   function hasTwoMatchingCards(cards = game.cards): boolean {
@@ -70,7 +71,7 @@ export function NewGame(game: GameData = DefaultGameData): Game {
   }
 
   function hasMatchAllCards(cards = game.cards): boolean {
-    return cards.find(c => !c.isMatched) === undefined;
+    return cards.find((c) => !c.isMatched) === undefined;
   }
 
   return {
@@ -100,15 +101,15 @@ export function NewGame(game: GameData = DefaultGameData): Game {
       }
 
       let cards = game.cards.map((c) =>
-        c.id === card.id ? { ...c, isFaceUp: true } : c
+        c.id === card.id ? { ...c, isFaceUp: true, count: c.count + 1 } : c
       );
 
       let score = game.score;
 
       if (hasTwoMatchingCards(cards)) {
-        score++
+        score++;
 
-        cards = cards.map((c) => c.isFaceUp ? { ...c, isMatched: true } : c)
+        cards = cards.map((c) => (c.isFaceUp ? { ...c, isMatched: true } : c));
       }
 
       let end = game.end;
@@ -123,13 +124,13 @@ export function NewGame(game: GameData = DefaultGameData): Game {
         attempts: game.attempts + 1,
         cards,
         score,
-        end,
+        end
       });
     },
     resetUnmatchedCards(): Game {
       return NewGame({
         ...game,
-        cards: game.cards.map(c => c.isMatched ? c : ({ ...c, isFaceUp: false })),
+        cards: game.cards.map((c) => c.isMatched ? c : ({ ...c, isFaceUp: false })),
       });
     },
     getDuration(): string {
@@ -140,7 +141,7 @@ export function NewGame(game: GameData = DefaultGameData): Game {
       let end = new Date();
 
       if (game.end !== null) {
-        end = game.end
+        end = game.end;
       }
 
       const diff = end.getTime() - game.start.getTime();
@@ -153,13 +154,16 @@ export function NewGame(game: GameData = DefaultGameData): Game {
       return `${minutes}m ${seconds}s`;
     },
     getScore(): number {
-      return game.score
+      return game.score;
     },
     getAttempts(): number {
-      return game.attempts
+      return game.attempts;
     },
     getCards(): Card[] {
       return game.cards;
+    },
+    getCounts(): number[] {
+      return game.cards.map((c) => c.count);
     },
     hasFlippedTwoCardsWithoutMatch(): boolean {
       if (!hasFlippedTwoCards()) {
@@ -167,11 +171,11 @@ export function NewGame(game: GameData = DefaultGameData): Game {
       }
 
       if (hasTwoMatchingCards()) {
-        return false
+        return false;
       }
 
       return true;
     },
-    hasMatchAllCards,
-  }
+    hasMatchAllCards
+  };
 }
