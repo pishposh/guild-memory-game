@@ -4,11 +4,9 @@ import { Difficulty } from '../../game';
 import './GameSettings.css';
 
 export const GameSettings = ({
-  isOpen,
   onClose,
   onSave,
 }: {
-  isOpen: boolean;
   onClose: () => void;
   onSave: (difficulty: Difficulty) => void;
 }) => {
@@ -21,7 +19,7 @@ export const GameSettings = ({
   };
 
   return (
-    <dialog className={clsx('dialog', isOpen && 'show')} ref={dialogRef}>
+    <dialog className="settings-dialog">
       <span
         className="close-button"
         onClick={() => {

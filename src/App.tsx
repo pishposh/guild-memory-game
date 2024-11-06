@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { PicketSign } from './components/PicketSign';
 import { GameSettings } from './components/GameSettings';
+import { ResultsDialog } from './components/ResultsDialog';
+import { InfoDialog } from './components/InfoDialog';
 import { Difficulty, Game, NewGame } from './game';
 
 function App() {
   const [game, setGame] = useState<Game>(NewGame());
   const [duration, setDuration] = useState('0m 0s');
   const [gameSettingsOpen, setGameSettingsOpen] = useState(false);
-  const [gameDifficulty, setGameDifficulty] = useState<Difficulty>(Difficulty.EASY);
+  const [showDialog, setShowDialog] = useState(false);
+  const [infoDialogOpen, setInfoDialogOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,24 +34,45 @@ function App() {
       if (timeout) {
         clearTimeout(timeout);
       }
-    }
+    };
   }, [game, setGame]);
+
+  useEffect(() => {
+    let timeout: number | undefined;
+    if (game.hasMatchAllCards()) {
+      timeout = setTimeout(() => setShowDialog(true), 1200);
+    }
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [game]);
 
   return (
     <>
       <div id="header">
-        <h1 style={{margin: '0.2em 0.5em 0'}}>Match Strike</h1>
-        <button style={{float: 'right', margin: '0 0.5em 0'}} type='button' onClick={() => setGameSettingsOpen(!gameSettingsOpen)}>
+        <a href="https://nytimesguild.org/tech/">
+          More Games
+        </a>
+        <a style={{cursor: "pointer"}} onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
+          What’s this?
+        </a>
+        {infoDialogOpen && (
+          <InfoDialog onClose={() => setInfoDialogOpen(false)} />
+        )}
+        <a style={{cursor: "pointer"}} onClick={() => setGameSettingsOpen(!gameSettingsOpen)}>
           Settings
-        </button>
-        <GameSettings
+        </a>
+        {gameSettingsOpen && (
+          <GameSettings
           onClose={() => setGameSettingsOpen(false)}
-          isOpen={gameSettingsOpen}
           onSave={(difficulty) => {
             //Reset the game with the new difficulty
             setGame(game.resetWithDifficulty(difficulty))
           }}
         />
+        )}
       </div>
       <div id="game-container">
         <div id="game">
@@ -78,30 +102,19 @@ function App() {
           </div>
         </div>
       </div>
-      {
-        game.hasMatchAllCards() &&
-        <div className="summary-container">
-          <div className="summary">
-            <h1>You ratified a contract!</h1>
-            <p className="time">
-              <strong>Time spent:</strong> {duration}
-            </p>
-            <p className="attempts">
-              <strong>Picket signs flipped:</strong> {game.getAttempts()}
-            </p>
-            <button 
-              type='button' 
-              onClick={() => setGame(game.reset())}
-            >
-              Play Again
-            </button>
-          </div>
-        </div>
-      }
+      {showDialog && (
+        <ResultsDialog
+          game={game}
+          onClose={() => setShowDialog(false)}
+          onReset={() => {
+            setShowDialog(false);
+            setGame(game.reset());
+          }}
+          duration={duration}
+        />
+      )}
     </>
   );
 }
 
 export default App;
-
-
