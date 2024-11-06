@@ -25,7 +25,7 @@ const DefaultGameData = {
     end: null,
     score: 0,
     attempts: 0,
-    cards: getInitialCards(),
+    cards: getInitialCards(1),
 }
 
 export function NewGame(game: GameData = DefaultGameData): Game{

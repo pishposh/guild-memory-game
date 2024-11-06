@@ -10,7 +10,7 @@ enum SignContent {
 }
 
 export interface Card {
-    id: number;
+    id: string;
     value: SignContent;
     isFaceUp: boolean;
     isMatched: boolean;
@@ -18,11 +18,13 @@ export interface Card {
 
 const CARD_VALUES = Object.values(SignContent);
 
-export function getInitialCards() {
+export function getInitialCards(): Card[] {
+    const date = new Date().toISOString();
+
     return [...CARD_VALUES, ...CARD_VALUES]
-        .map((value, id) => ({
+        .map((value, index) => ({
             value,
-            id,
+            id: date + index,
             isFaceUp: false,
             isMatched: false
         }))
