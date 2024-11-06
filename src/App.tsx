@@ -34,9 +34,17 @@ function App() {
   }, [game, setGame]);
 
   useEffect(() => {
+    let timeout: number | undefined;
+
     if (game.hasMatchAllCards()) {
-      setShowDialog(true);
+      timeout = setTimeout(() => setShowDialog(true), 1000);
     }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
   }, [game]);
 
   return (
