@@ -1,13 +1,11 @@
 import { Card, getInitialCards } from './card';
 
 export interface Game {
-    handleEnd(): Game;
     handleClick(card: Card): Game;
     resetUnmatchedCards(): Game;
     getDuration(): string;
     getScore(): number;
     getAttempts(): number;
-    getFaceUpCards(): Card[];
     getCards(): Card[];
     hasFlippedTwoCards(): boolean;
     hasFlippedTwoCardsWithoutMatch(): boolean;
@@ -43,13 +41,11 @@ export function NewGame(game: GameData = DefaultGameData): Game{
         return one?.value === two?.value;
     }
 
+    function hasMatchAllCards(cards = game.cards): boolean {
+        return cards.find(c => !c.isMatched) === undefined;
+    }
+
     return {
-        handleEnd(): Game {
-            return NewGame({
-                ...game,
-                end: new Date(),
-            });
-        },
         handleClick(card: Card): Game {
             if (card.isFaceUp || card.isMatched || hasFlippedTwoCards()) {
                 return this;
@@ -67,12 +63,19 @@ export function NewGame(game: GameData = DefaultGameData): Game{
                 cards = cards.map((c) => c.isFaceUp ? { ...c, isMatched: true } : c)
             }
 
+            let end = game.end;
+
+            if (end === null && hasMatchAllCards(cards)) {
+                end = new Date();
+            }
+
             return NewGame({
                 ...game,
                 start: game.start === null ? new Date() : game.start,
                 attempts: game.attempts + 1,
                 cards,
                 score,
+                end,
             });
         },
         resetUnmatchedCards(): Game {
@@ -121,7 +124,6 @@ export function NewGame(game: GameData = DefaultGameData): Game{
 
             return true;
         },
-        getFaceUpCards,
         hasFlippedTwoCards,
     }
 }
