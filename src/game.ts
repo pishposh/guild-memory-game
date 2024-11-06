@@ -12,12 +12,35 @@ export interface Game {
     hasMatchAllCards(): boolean;
 }
 
+interface DifficultyLevel {
+    numCards: number,
+    matchLength: number,
+}
+
+enum Difficulty {
+    EASY = 'easy',
+    MEDIUM = 'medium',
+    HARD = 'hard' 
+}
+
+function getDifficultySpec(difficulty: Difficulty): DifficultyLevel {
+    switch (difficulty) {
+        case Difficulty.EASY:
+            return {numCards:2, matchLength: 2};
+        case Difficulty.MEDIUM:
+            return {numCards:4, matchLength: 2};
+        case Difficulty.HARD:
+            return {numCards:8, matchLength: 2};
+    }
+}
+
 interface GameData {
     start: Date | null;
     end: Date | null;
     score: number;
     attempts: number;
     cards: Card[];
+    // difficulty: DifficultyLevel;
 }
 
 const DefaultGameData = {
@@ -25,8 +48,10 @@ const DefaultGameData = {
     end: null,
     score: 0,
     attempts: 0,
-    cards: getInitialCards(),
+    cards: getInitialCards(getDifficultySpec(Difficulty.EASY).numCards),
+    // difficulty: getDifficultySpec(Difficulty.EASY)
 }
+
 
 export function NewGame(game: GameData = DefaultGameData): Game{
     function getFaceUpCards(cards = game.cards): Card[] {
@@ -53,7 +78,8 @@ export function NewGame(game: GameData = DefaultGameData): Game{
                 end: null,
                 score: 0,
                 attempts: 0,
-                cards: getInitialCards(),
+                cards: getInitialCards(getDifficultySpec(Difficulty.EASY).numCards),
+                // difficulty: getDifficultySpec(Difficulty.EASY)
             })
         },
         handleClick(card: Card): Game {
@@ -121,6 +147,7 @@ export function NewGame(game: GameData = DefaultGameData): Game{
             return game.attempts
         },
         getCards(): Card[] {
+            console.log(`returning ${game.cards.length} cards`)
             return game.cards;
         },
         hasFlippedTwoCardsWithoutMatch(): boolean {

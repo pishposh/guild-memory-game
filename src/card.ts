@@ -16,10 +16,11 @@ export interface Card {
     isMatched: boolean;
 }
 
-const CARD_VALUES = Object.values(SignContent);
+// const CARD_VALUES = Object.values(SignContent);
 
-export function getInitialCards(): Card[] {
+export function getInitialCards(countCardsInPlay: number): Card[] {
     const date = new Date().toISOString();
+    const CARD_VALUES = Object.values(SignContent).slice(0, countCardsInPlay)
 
     return [...CARD_VALUES, ...CARD_VALUES]
         .map((value, index) => ({
