@@ -53,6 +53,7 @@ div#game {
   width: 100%;
   padding-top: 20px;
 }
+
 .scoreboard {
   display: block;
   padding: 0 20px;
@@ -64,4 +65,8 @@ div#game {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.scoreboard p {
+  margin: 0;
 }
