@@ -4,22 +4,23 @@
   --scoreboard-width: calc(4 * var(--cell-size));
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1600px), (orientation: landscape) {
   * {
-    --cell-size: 200px;
+    --cell-size: min(21vh, 23vw);
   }
 }
 
-@media (max-width: 700px) {
+@media (orientation: portrait) and (min-width: 910px) and (max-width: 1600px) {
   * {
-    --cell-size: 25vw;
-    --scoreboard-width: 100%;
+    --cell-size: min(22vh, 23vw);
   }
 }
 
-@media (min-width: 700px) and (max-width: 1600px) {
+@media (orientation: portrait) and (max-width: 910px) {
   * {
-    --cell-size: min(18vw, 150px);
+    --cell-size: min(14vh, 33vw);
+    --grid-size: repeat(3, var(--cell-size));
+    --scoreboard-width: calc(3 * var(--cell-size));
   }
 }
 
