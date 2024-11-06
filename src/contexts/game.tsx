@@ -110,7 +110,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [duration, getDuration, setDuration]);
+  }, [getDuration, setDuration]);
 
   useEffect(() => {
     let timeout: number | undefined;
