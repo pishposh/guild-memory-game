@@ -51,12 +51,12 @@ div#game {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 0.5rem;
 }
 
 .scoreboard {
   display: block;
-  padding: 0 20px;
+  padding: 0 0.5rem;
   width: var(--scoreboard-width);
 }
 
