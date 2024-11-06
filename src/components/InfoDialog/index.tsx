@@ -39,11 +39,11 @@ export const InfoDialog = ({
         <h3>Why are you on strike?</h3>
 
         <p>
-          The Times Tech Guild---unionized workers who build and maintain election-critical programs and power all the games you love---have been fighting for a first contract for over two years. The company failed to come to an acceptable deal, and we are now on strike over the company's numerous unfair labor practices.
+          The Times Tech Guild—unionized workers who build and maintain election-critical programs and power all the games you love—have been fighting for a first contract for over two years. The company failed to come to an acceptable deal, and we are now on strike over the company's numerous unfair labor practices.
         </p>
 
         <p>
-          We need your support---<a href="https://docs.google.com/forms/d/e/1FAIpQLSdtdcZ7zzDBS2WTf8dbGQ5hyCOvb0hYCDOPetOwucGJLDQj6w/viewform">Tell The New York Times you stand with tech workers in our fight for a fair contract!</a>
+          We need your support. <a href="https://docs.google.com/forms/d/e/1FAIpQLSdtdcZ7zzDBS2WTf8dbGQ5hyCOvb0hYCDOPetOwucGJLDQj6w/viewform">Tell The New York Times you stand with tech workers in our fight for a fair contract!</a>
         </p>
 
         <p>

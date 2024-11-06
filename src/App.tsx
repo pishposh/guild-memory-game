@@ -36,15 +36,18 @@ function App() {
   return (
     <>
       <div id="header">
-        <h1 style={{margin: '0.2em 0.5em 0'}}>Match Strike</h1>
-        <button style={{float: 'right', margin: '0 0.5em 0'}} type='button' onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
+        <a href="https://nytimesguild.org/tech/">
+          More Games
+        </a>
+        <a style={{cursor: "pointer"}} onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
           What’s this?
-        </button>
+        </a>
         <InfoDialog
           onClose={() => setInfoDialogOpen(false)}
           isOpen={infoDialogOpen}
         />
       </div>
+
       <div id="game-container">
         <div id="game">
           {game.getCards().map((card) => (
