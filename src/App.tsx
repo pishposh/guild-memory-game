@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { PicketSign } from './components/PicketSign';
+import { GameSettings, Difficulty } from './components/GameSettings';
 import { Game, NewGame } from './game';
 
 function App() {
   const [game, setGame] = useState<Game>(NewGame());
   const [duration, setDuration] = useState('0m 0s');
+  const [gameSettingsOpen, setGameSettingsOpen] = useState(false);
+  const [gameDifficulty, setGameDifficulty] = useState<Difficulty>(Difficulty.ONE);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,6 +36,19 @@ function App() {
 
   return (
     <>
+      <div id="header">
+        <h1 style={{margin: '0.2em 0.5em 0'}}>Match Strike</h1>
+        <button style={{float: 'right', margin: '0 0.5em 0'}} type='button' onClick={() => setGameSettingsOpen(!gameSettingsOpen)}>
+          Settings
+        </button>
+        <GameSettings
+          onClose={() => setGameSettingsOpen(false)}
+          isOpen={gameSettingsOpen}
+          onSave={(difficulty) => {
+            setGameDifficulty(difficulty)
+          }}
+        />
+      </div>
       <div id="game-container">
         <div id="game">
           {game.getCards().map((card) => (
