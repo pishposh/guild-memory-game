@@ -14,6 +14,7 @@ enum SignContent {
   TechSupport = 'tech-support-avatar.png',
   TickTock = 'tick-tock-avatar.png',
   UnionFist = 'union-fist.png',
+  ReadyToStrike = 'ready-to-strike_text-only-avatar.png',
 }
 
 export interface Card {
