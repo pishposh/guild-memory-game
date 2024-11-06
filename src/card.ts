@@ -1,4 +1,4 @@
-export enum SignContent {
+enum SignContent {
     ContractSpellingBee = 'contract-spelling-bee.webp',
     GuildRound = 'guild-logo-round.webp',
     GuildSquare = 'guild-logo-square.webp',
@@ -19,29 +19,13 @@ export interface Card {
 const CARD_VALUES = Object.values(SignContent);
 
 export function getInitialCards() {
-    const initialCards = [...CARD_VALUES, ...CARD_VALUES].map((value, id) => ({
-        value,
-        id,
-        isFaceUp: false,
-        isMatched: false
-    }));
-
-    // https://stackoverflow.com/questions/48083353/i-want-to-know-how-to-shuffle-an-array-in-typescript
-    let currentIndex = initialCards.length,
-        randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-        // Pick a remaining element.
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        // And swap it with the current element.
-        [initialCards[currentIndex], initialCards[randomIndex]] = [
-        initialCards[randomIndex],
-        initialCards[currentIndex]
-        ];
-    }
-
-    return initialCards;
+    return [...CARD_VALUES, ...CARD_VALUES]
+        .map((value, id) => ({
+            value,
+            id,
+            isFaceUp: false,
+            isMatched: false
+        }))
+        // -1, 0, or 1: sorts randomly
+        .sort(() => Math.floor(Math.random() * 3) - 1);
 }
