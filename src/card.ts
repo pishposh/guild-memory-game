@@ -22,16 +22,21 @@ const CARD_VALUES = Object.values(SignContent);
 export function getInitialCards(): Card[] {
   const date = new Date().toISOString();
 
-  return (
-    [...CARD_VALUES, ...CARD_VALUES]
-      .map((value, index) => ({
-        value,
-        id: date + index,
-        isFaceUp: false,
-        isMatched: false,
-        count: 0
-      }))
-      // -1, 0, or 1: sorts randomly
-      .sort(() => Math.floor(Math.random() * 3) - 1)
-  );
+  const cards = [...CARD_VALUES, ...CARD_VALUES].map((value, index) => ({
+    value,
+    id: date + index,
+    isFaceUp: false,
+    isMatched: false,
+    count: 0
+  }));
+  shuffleArray(cards);
+  return cards;
+}
+
+// note, sort(() => 0.5 - Math.random()) and similar are biased; see <https://stackoverflow.com/a/12646864>
+function shuffleArray(array: unknown[]) {
+  for (let i = array.length - 1; i >= 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }
