@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
-import { Card } from '../../types';
+import { Card } from '../../card';
 import './PicketSign.css';
 
 export const PicketSign = ({ card }: { card: Card }) => {
