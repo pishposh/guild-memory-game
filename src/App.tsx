@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { PicketSign } from './components/PicketSign';
 import { Game, NewGame } from './game';
+import { InfoDialog } from './components/InfoDialog';
 
 function App() {
   const [game, setGame] = useState<Game>(NewGame());
   const [duration, setDuration] = useState('0m 0s');
+  const [infoDialogOpen, setInfoDialogOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,6 +35,16 @@ function App() {
 
   return (
     <>
+      <div id="header">
+        <h1 style={{margin: '0.2em 0.5em 0'}}>Match Strike</h1>
+        <button style={{float: 'right', margin: '0 0.5em 0'}} type='button' onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
+          What’s this?
+        </button>
+        <InfoDialog
+          onClose={() => setInfoDialogOpen(false)}
+          isOpen={infoDialogOpen}
+        />
+      </div>
       <div id="game-container">
         <div id="game">
           {game.getCards().map((card) => (
@@ -72,8 +84,8 @@ function App() {
             <p className="attempts">
               <strong>Picket signs flipped:</strong> {game.getAttempts()}
             </p>
-            <button 
-              type='button' 
+            <button
+              type='button'
               onClick={() => setGame(game.reset())}
             >
               Play Again
