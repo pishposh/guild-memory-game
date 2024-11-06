@@ -17,8 +17,9 @@ export const PicketSign = ({ card }: { card: Card }) => {
   const imageSrc = useMemo(() => `assets/sign-content/${value}`, [value]);
 
   return (
-    <div className={clsx('container', isFaceUp ? 'face-up' : 'face-down')}>
+    <button className={clsx('container', isFaceUp ? 'face-up' : 'face-down')}>
       {!matched && (
+        // Back of sign
         <div className="back-container">
           <img
             className="sign-image"
@@ -27,6 +28,7 @@ export const PicketSign = ({ card }: { card: Card }) => {
           />
         </div>
       )}
+       {/* Front of sign  */}
       <div className={clsx('front-container', matched && 'matched')}>
         <img
           className="sign-image"
@@ -42,6 +44,6 @@ export const PicketSign = ({ card }: { card: Card }) => {
           />
         </div>
       </div>
-    </div>
+    </button>
   );
 };
