@@ -3,12 +3,13 @@ import { Card, getInitialCards } from './card';
 export interface Game {
     handleClick(card: Card): Game;
     resetUnmatchedCards(): Game;
+    reset(): Game;
     getDuration(): string;
     getScore(): number;
     getAttempts(): number;
     getCards(): Card[];
-    hasFlippedTwoCards(): boolean;
     hasFlippedTwoCardsWithoutMatch(): boolean;
+    hasMatchAllCards(): boolean;
 }
 
 interface GameData {
@@ -46,6 +47,15 @@ export function NewGame(game: GameData = DefaultGameData): Game{
     }
 
     return {
+        reset(): Game {
+            return NewGame({
+                start: null,
+                end: null,
+                score: 0,
+                attempts: 0,
+                cards: getInitialCards(),
+            })
+        },
         handleClick(card: Card): Game {
             if (card.isFaceUp || card.isMatched || hasFlippedTwoCards()) {
                 return this;
@@ -124,6 +134,6 @@ export function NewGame(game: GameData = DefaultGameData): Game{
 
             return true;
         },
-        hasFlippedTwoCards,
+        hasMatchAllCards,
     }
 }

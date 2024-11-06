@@ -61,6 +61,26 @@ function App() {
           </div>
         </div>
       </div>
+      {
+        game.hasMatchAllCards() &&
+        <div className="summary-container">
+          <div className="summary">
+            <h1>You ratified a contract!</h1>
+            <p className="time">
+              <strong>Time spent:</strong> {duration}
+            </p>
+            <p className="attempts">
+              <strong>Picket signs flipped:</strong> {game.getAttempts()}
+            </p>
+            <button 
+              type='button' 
+              onClick={() => setGame(game.reset())}
+            >
+              Play Again
+            </button>
+          </div>
+        </div>
+      }
     </>
   );
 }

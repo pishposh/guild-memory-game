@@ -71,3 +71,35 @@ div#game {
 .scoreboard p {
   margin: 0;
 }
+
+.summary-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary {
+  color: var(--color);
+  background-color: var(--background-color);
+  padding: 2rem;
+  border: 6px solid black;
+  border-radius: 6px;
+}
+
+.summary h1 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.summary p {
+  margin-bottom: 0.5rem;
+}
+
+.summary button {
+  margin-top: 1rem;
+}
