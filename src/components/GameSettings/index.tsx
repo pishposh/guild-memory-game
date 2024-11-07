@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Dialog } from '../Dialog';
 import { Difficulty } from '../../game';
 import './GameSettings.css';
 
@@ -11,6 +12,7 @@ export const GameSettings = ({
   onSave: (difficulty: Difficulty) => void;
   currentDifficulty: Difficulty;
 }) => {
+
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>(Difficulty.EASY);
 
   useEffect(() => {
@@ -23,11 +25,8 @@ export const GameSettings = ({
   };
 
   return (
-    <dialog className="settings-dialog">
-      <span className="settings-close-button" onClick={onClose}>
-        ❌
-      </span>
-      <div className="container">
+    <Dialog onClose={onClose} centerX centerY>
+      <div className="settings-container">
 
         <label>Choose your difficulty:</label>
 
@@ -37,16 +36,15 @@ export const GameSettings = ({
         <option value={Difficulty.HARD}>Hard</option>
         </select>
 
-      <button
-        className="button"
-        onClick={() => {
-          onSave(selectedDifficulty);
-          onClose();
-        }}
-      >
-        Let's Play!
-      </button>
+        <button className="button"
+          onClick={() => {
+            onSave(selectedDifficulty);
+            onClose();
+          }}
+          >
+          Let's Play!
+        </button>
       </div>
-    </dialog>
+    </Dialog>
   );
 };
