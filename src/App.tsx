@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import './App.css';
+import { Header } from './components/Header';
 import { InfoDialog } from './components/InfoDialog';
 import { PicketSign } from './components/PicketSign';
 import { ResultsDialog } from './components/ResultsDialog';
@@ -33,15 +34,14 @@ function App() {
 
   return (
     <>
-      <div id="header">
-        <a href="https://nytimesguild.org/tech/">More Games</a>
-        <a
-          style={{ cursor: 'pointer' }}
+      <Header>
+        <span
+          className="link-alike"
           onClick={() => setInfoDialogOpen(!infoDialogOpen)}
         >
           What’s this?
-        </a>
-      </div>
+        </span>
+      </Header>
 
       <div id="game-container">
         <div id="game">

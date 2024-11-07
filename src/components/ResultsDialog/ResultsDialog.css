@@ -13,3 +13,14 @@
   flex-direction: column;
   gap: 1rem;
 }
+
+.attempts,
+.time {
+  margin: 0;
+}
+
+p.square-key {
+  > span:not(:last-child) {
+    margin-right: 1rem;
+  }
+}

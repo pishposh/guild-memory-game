@@ -49,6 +49,11 @@ export const ResultsDialog = ({
             <span>{square}</span>
           ))}
         </div>
+        <p className="square-key">
+          <span>🟩 = 1️</span>
+          <span>🟨 = 2</span>
+          <span>🟥 = 3+</span>
+        </p>
         <button onClick={copyResults}>Copy to Clipboard</button>
         <button type="button" onClick={onReset}>
           Play Again

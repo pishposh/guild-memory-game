@@ -1,0 +1,33 @@
+#header {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid gray;
+  margin-bottom: 0.5rem;
+  border: none;
+}
+
+#header a {
+  text-decoration: underline;
+}
+
+.header-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  > div.header-title {
+    justify-content: center;
+    font-size: x-large;
+  }
+
+  > div.header-links {
+    justify-content: end;
+    & > * {
+      margin-left: 1rem;
+    }
+  }
+}

@@ -1,16 +1,17 @@
 import { Dialog } from '../Dialog';
+import './InfoDialog.css';
 
 export const InfoDialog = ({ onClose }: { onClose: () => void }) => {
   return (
-    <Dialog onClose={onClose}>
+    <Dialog onClose={onClose} centerX>
       <div className="info-container">
         <h2>What’s this?</h2>
 
         <p>
-          A Times Tech Guild-themed variant on the classic Memory card game,
-          where playing cards are placed face down in a grid format and then
-          turned over two at a time, seeking matching pairs. Instead of playing
-          cards, we used strike placards.
+          Match Strike is a Times Tech Guild-themed variant on the classic
+          Memory card game, where playing cards are placed face down in a grid
+          format and then turned over two at a time, seeking matching pairs.
+          Instead of playing cards, we used strike placards.
         </p>
 
         <h3>Why did we build it?</h3>
@@ -22,7 +23,7 @@ export const InfoDialog = ({ onClose }: { onClose: () => void }) => {
           supporters can play games without crossing the picket digital line.
         </p>
 
-        <h3>Why are you on strike?</h3>
+        <h3>Why is the Tech Guild on strike?</h3>
 
         <p>
           The Times Tech Guild—unionized workers who build and maintain
