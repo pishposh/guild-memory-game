@@ -15,7 +15,10 @@ export const ResultsDialog = ({
   game: Game;
 }) => {
   const squares = useMemo(
-    () => game.getCounts().map((c) => (c === 1 ? '🟩' : c === 2 ? '🟨' : '🟥')),
+    () =>
+      game
+        .getCounts()
+        .map((c) => (c === 1 ? '🟦' : c === 2 ? '🟩' : c === 3 ? '🟨' : '🟥')),
     [game]
   );
 
@@ -49,8 +52,9 @@ export const ResultsDialog = ({
           ))}
         </div>
         <p className="square-key">
-          <span>🟩 = 1️</span>
-          <span>🟨 = 2</span>
+          <span>🟦 = 1</span>
+          <span>🟩 = 2</span>
+          <span>🟨 = 3</span>
           <span>🟥 = 3+</span>
         </p>
         <button onClick={copyResults}>Copy to Clipboard</button>
