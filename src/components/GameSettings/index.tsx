@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Difficulty } from '../../game';
 import './GameSettings.css';
 
 export const GameSettings = ({
   onClose,
   onSave,
+  currentDifficulty,
 }: {
   onClose: () => void;
   onSave: (difficulty: Difficulty) => void;
+  currentDifficulty: Difficulty;
 }) => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>(Difficulty.EASY);
+
+  useEffect(() => {
+    setSelectedDifficulty(currentDifficulty);
+  }, [currentDifficulty]);
 
   const handleChangeDifficulty = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newValue = event.target.value;

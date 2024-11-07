@@ -69,12 +69,12 @@ function App() {
         </a>
         {gameSettingsOpen && (
           <GameSettings
-          onClose={() => setGameSettingsOpen(false)}
-          onSave={(difficulty) => {
-            //Reset the game with the new difficulty
-            setGame(game.resetWithDifficulty(difficulty))
-          }}
-        />
+            onClose={() => setGameSettingsOpen(false)}
+            onSave={(difficulty) => {
+              setGame(game.resetWithDifficulty(difficulty));
+            }}
+            currentDifficulty={game.getDifficulty()}
+          />
         )}
       </Header>
 
