@@ -6,15 +6,20 @@
 }
 
 #header a {
-  text-decoration: underline;
+  &:has(.toi-icon) {
+    text-decoration: unset;
+  }
+  .toi-text {
+    text-decoration: underline;
+  }
 }
 
 .header-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: space-between;
 
   > div {
-    width: 100%;
+    width: 33%;
     display: flex;
     align-items: center;
   }
@@ -22,12 +27,16 @@
   > div.header-title {
     justify-content: center;
     font-size: x-large;
+    min-width: 145px;
   }
 
   > div.header-links {
     justify-content: end;
-    & > a, & > .link-alike {
-      margin-left: 1rem;
+
+    button {
+      margin-left: 0.5rem;
+      padding: 0.25rem;
+      background-color: inherit;
     }
   }
 }

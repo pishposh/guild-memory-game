@@ -1,0 +1,14 @@
+@media (min-width: 910px) {
+  .toi-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 910px) {
+  .toi-icon {
+    font-size: x-large;
+  }
+  .toi-text {
+    display: none;
+  }
+}
