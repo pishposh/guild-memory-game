@@ -50,13 +50,13 @@ function App() {
   return (
     <>
       <header id="header">
-        <a href="https://nytimesguild.org/tech/">More Games</a>
-        <a
-          style={{ cursor: 'pointer' }}
+        <a href="https://nytimesguild.org/tech/guild-builds/">More Games</a>
+        <span
+          className="link-alike"
           onClick={() => setInfoDialogOpen(!infoDialogOpen)}
         >
           What’s this?
-        </a>
+        </span>
       </header>
 
       <div id="game-container">
