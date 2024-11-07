@@ -6,7 +6,15 @@ enum SignContent {
   MakerWeekGuild = 'maker-week-guild.webp',
   UnionMadeGithub = 'union-made-github.webp',
   WuerkerCartoon = 'wuerker-cartoon.webp',
-  ContractCrossword = 'contract-crossword.webp'
+  ContractCrossword = 'contract-crossword.webp',
+  DontPlayGames = 'dontplaygames-socialstrike.png',
+  MooDeng = 'moo-deng.png',
+  Scabby = 'scabby.jpg',
+  StandWithGuild = 'stand-with-guild-avatar.png',
+  TechSupport = 'tech-support-avatar.png',
+  TickTock = 'tick-tock-avatar.png',
+  UnionFist = 'union-fist.png',
+  ReadyToStrike = 'ready-to-strike_text-only-avatar.png',
 }
 
 export interface Card {
