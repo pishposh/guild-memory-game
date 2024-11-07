@@ -25,11 +25,10 @@ export interface Card {
   count: number;
 }
 
-// const CARD_VALUES = Object.values(SignContent);
-
 export function getInitialCards(countCardsInPlay: number): Card[] {
-    const date = new Date().toISOString();
+  const date = new Date().toISOString();
   let cardValues = Object.values(SignContent);
+  //@ts-ignore 
   shuffleArray(cardValues);
   cardValues = cardValues.slice(0, countCardsInPlay);
 
