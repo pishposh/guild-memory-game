@@ -49,7 +49,7 @@ function App() {
 
   return (
     <>
-      <div id="header">
+      <header id="header">
         <a href="https://nytimesguild.org/tech/">More Games</a>
         <a
           style={{ cursor: 'pointer' }}
@@ -57,7 +57,7 @@ function App() {
         >
           What’s this?
         </a>
-      </div>
+      </header>
 
       <div id="game-container">
         <div id="game">

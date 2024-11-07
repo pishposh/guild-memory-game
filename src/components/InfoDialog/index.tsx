@@ -1,8 +1,9 @@
 import { Dialog } from '../Dialog';
+import './InfoDialog.css';
 
 export const InfoDialog = ({ onClose }: { onClose: () => void }) => {
   return (
-    <Dialog onClose={onClose}>
+    <Dialog onClose={onClose} centerX>
       <div className="info-container">
         <h2>What’s this?</h2>
 
