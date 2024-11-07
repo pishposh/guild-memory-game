@@ -21,9 +21,11 @@ export interface Card {
 
 export function getInitialCards(countCardsInPlay: number): Card[] {
     const date = new Date().toISOString();
-    const CARD_VALUES = Object.values(SignContent).slice(0, countCardsInPlay)
+  let cardValues = Object.values(SignContent);
+  shuffleArray(cardValues);
+  cardValues = cardValues.slice(0, countCardsInPlay);
 
-  const cards = [...CARD_VALUES, ...CARD_VALUES].map((value, index) => ({
+  const cards = [...cardValues, ...cardValues].map((value, index) => ({
     value,
     id: date + index,
     isFaceUp: false,
