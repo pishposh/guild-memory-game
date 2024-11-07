@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { InfoDialog } from './components/InfoDialog';
 import { PicketSign } from './components/PicketSign';
 import { ResultsDialog } from './components/ResultsDialog';
+import { Scoreboard } from './components/Scoreboard';
 import { Game, NewGame } from './game';
 
 function App() {
@@ -72,21 +73,7 @@ function App() {
           ))}
         </div>
       </div>
-      <div className="scoreboard-container">
-        <div className="scoreboard">
-          <p className="time">
-            <strong>Time spent:</strong> {duration}
-          </p>
-          <div className="row">
-            <p className="attempts">
-              <strong>Picket signs flipped:</strong> {game.getAttempts()}
-            </p>
-            <p className="score">
-              <strong>Matches:</strong> {game.getScore()}
-            </p>
-          </div>
-        </div>
-      </div>
+      <Scoreboard game={game} duration={duration} />
       {showDialog && (
         <ResultsDialog
           game={game}
