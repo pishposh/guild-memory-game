@@ -14,7 +14,7 @@ enum SignContent {
   TechSupport = 'tech-support-avatar.png',
   TickTock = 'tick-tock-avatar.png',
   UnionFist = 'union-fist.png',
-  ReadyToStrike = 'ready-to-strike_text-only-avatar.png',
+  ReadyToStrike = 'ready-to-strike_text-only-avatar.png'
 }
 
 export interface Card {
@@ -43,7 +43,7 @@ export function getInitialCards(countCardsInPlay: number): Card[] {
 }
 
 // note, sort(() => 0.5 - Math.random()) and similar are biased; see <https://stackoverflow.com/a/12646864>
-function shuffleArray(array: unknown[]) {
+function shuffleArray<T>(array: T[]) {
   for (let i = array.length - 1; i >= 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
