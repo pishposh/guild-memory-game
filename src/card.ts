@@ -10,24 +10,34 @@ enum SignContent {
 }
 
 export interface Card {
-    id: string;
-    value: SignContent;
-    isFaceUp: boolean;
-    isMatched: boolean;
+  id: string;
+  value: SignContent;
+  isFaceUp: boolean;
+  isMatched: boolean;
+  count: number;
 }
 
-const CARD_VALUES = Object.values(SignContent);
+export function getInitialCards(countCardsInPlay: number): Card[] {
+  const date = new Date().toISOString();
+  let cardValues = Object.values(SignContent);
+  shuffleArray(cardValues);
+  cardValues = cardValues.slice(0, countCardsInPlay);
 
-export function getInitialCards(): Card[] {
-    const date = new Date().toISOString();
+  const cards = [...cardValues, ...cardValues].map((value, index) => ({
+    value,
+    id: date + index,
+    isFaceUp: false,
+    isMatched: false,
+    count: 0
+  }));
+  shuffleArray(cards);
+  return cards;
+}
 
-    return [...CARD_VALUES, ...CARD_VALUES]
-        .map((value, index) => ({
-            value,
-            id: date + index,
-            isFaceUp: false,
-            isMatched: false
-        }))
-        // -1, 0, or 1: sorts randomly
-        .sort(() => Math.floor(Math.random() * 3) - 1);
+// note, sort(() => 0.5 - Math.random()) and similar are biased; see <https://stackoverflow.com/a/12646864>
+function shuffleArray(array: unknown[]) {
+  for (let i = array.length - 1; i >= 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }

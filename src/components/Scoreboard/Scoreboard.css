@@ -1,0 +1,23 @@
+.scoreboard-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 0.5rem;
+}
+
+.scoreboard {
+  display: block;
+  padding: 0 0.5rem;
+  width: var(--scoreboard-width);
+}
+
+.scoreboard .row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.scoreboard p {
+  margin: 0;
+}

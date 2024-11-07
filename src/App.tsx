@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { GameSettings } from './components/GameSettings';
+import { Header } from './components/Header';
+import { InfoDialog } from './components/InfoDialog';
 import { PicketSign } from './components/PicketSign';
+import { ResultsDialog } from './components/ResultsDialog';
+import { Scoreboard } from './components/Scoreboard';
 import { Game, NewGame } from './game';
 
 function App() {
   const [game, setGame] = useState<Game>(NewGame());
   const [duration, setDuration] = useState('0m 0s');
+  const [gameSettingsOpen, setGameSettingsOpen] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+  const [infoDialogOpen, setInfoDialogOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,11 +36,49 @@ function App() {
       if (timeout) {
         clearTimeout(timeout);
       }
-    }
+    };
   }, [game, setGame]);
+
+  useEffect(() => {
+    let timeout: number | undefined;
+    if (game.hasMatchAllCards()) {
+      timeout = setTimeout(() => setShowDialog(true), 1200);
+    }
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [game]);
 
   return (
     <>
+      <Header>
+        <a href="https://nytimesguild.org/tech/guild-builds/">More Games</a>
+
+        <span
+          className="link-alike"
+          onClick={() => setInfoDialogOpen(!infoDialogOpen)}
+        >
+          What’s this?
+        </span>
+        <span
+          className="link-alike"
+          onClick={() => setGameSettingsOpen(!gameSettingsOpen)}
+        >
+          Settings
+        </span>
+        {gameSettingsOpen && (
+          <GameSettings
+            onClose={() => setGameSettingsOpen(false)}
+            onSave={(difficulty) => {
+              setGame(game.resetWithDifficulty(difficulty));
+            }}
+            currentDifficulty={game.getDifficulty()}
+          />
+        )}
+      </Header>
+
       <div id="game-container">
         <div id="game">
           {game.getCards().map((card) => (
@@ -46,45 +92,23 @@ function App() {
           ))}
         </div>
       </div>
-      <div className="scoreboard-container">
-        <div className="scoreboard">
-          <p className="time">
-            <strong>Time spent:</strong> {duration}
-          </p>
-          <div className="row">
-            <p className="attempts">
-              <strong>Picket signs flipped:</strong> {game.getAttempts()}
-            </p>
-            <p className="score">
-              <strong>Matches:</strong> {game.getScore()}
-            </p>
-          </div>
-        </div>
-      </div>
-      {
-        game.hasMatchAllCards() &&
-        <div className="summary-container">
-          <div className="summary">
-            <h1>You ratified a contract!</h1>
-            <p className="time">
-              <strong>Time spent:</strong> {duration}
-            </p>
-            <p className="attempts">
-              <strong>Picket signs flipped:</strong> {game.getAttempts()}
-            </p>
-            <button 
-              type='button' 
-              onClick={() => setGame(game.reset())}
-            >
-              Play Again
-            </button>
-          </div>
-        </div>
-      }
+      <Scoreboard game={game} duration={duration} />
+      {showDialog && (
+        <ResultsDialog
+          game={game}
+          onClose={() => setShowDialog(false)}
+          onReset={() => {
+            setShowDialog(false);
+            setGame(game.reset());
+          }}
+          duration={duration}
+        />
+      )}
+      {infoDialogOpen && (
+        <InfoDialog onClose={() => setInfoDialogOpen(false)} />
+      )}
     </>
   );
 }
 
 export default App;
-
-
