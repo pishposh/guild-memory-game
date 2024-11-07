@@ -15,8 +15,7 @@ export const GameContext = createContext({
   difficulty: Difficulty.HARD,
   duration: '',
   hasMatchAllCards: false,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  reset: (_d?: Difficulty) => {},
+  reset: () => {},
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   handleClick: (_card: Card) => {},
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

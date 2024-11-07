@@ -22,9 +22,10 @@ const DifficultySpec: Record<Difficulty, DifficultyLevel> = {
   [Difficulty.HARD]: { numCards: 8, matchLength: 2 }
 };
 
-export const GameProvider = ({
-  children
-}: PropsWithChildren & { level: DifficultyLevel }) => {
+export const GameProvider = ({ children }: PropsWithChildren) => {
+  // *********
+  // * state *
+  // *********
   const [difficulty, setDifficulty] = useState(Difficulty.HARD);
   const [start, setStart] = useState<Date | null>(null);
   const [end, setEnd] = useState<Date | null>(null);
@@ -34,8 +35,10 @@ export const GameProvider = ({
     getInitialCards(DifficultySpec.hard.numCards)
   );
 
-  // computed values
-  const level = useMemo(() => DifficultySpec[difficulty], [difficulty]);
+  // *******************
+  // * computed values *
+  // *******************
+  const spec = useMemo(() => DifficultySpec[difficulty], [difficulty]);
   const faceUpCards = useMemo(() => getFaceUp(cards), [cards]);
   const hasFlippedTwoCards = useMemo(
     () => faceUpCards.length >= 2,
@@ -54,7 +57,9 @@ export const GameProvider = ({
     return !hasFlippedTwoCards || hasTwoMatchingCards(cards) ? false : true;
   }, [cards, hasFlippedTwoCards]);
 
-  // functions
+  // *************
+  // * functions *
+  // *************
   const resetUnmatchedCards = useCallback(() => {
     setCards(cards.map((c) => (c.isMatched ? c : { ...c, isFaceUp: false })));
   }, [cards, setCards]);
@@ -101,8 +106,8 @@ export const GameProvider = ({
     setStart(null);
     setEnd(null);
     setAttempts(0);
-    setCards(getInitialCards(level.numCards));
-  }, [level.numCards]);
+    setCards(getInitialCards(spec.numCards));
+  }, [spec.numCards]);
 
   // side effects
   useEffect(() => {
