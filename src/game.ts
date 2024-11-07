@@ -11,6 +11,7 @@ export interface Game {
   getCards(): Card[];
   getCounts(): number[];
   hasFlippedTwoCardsWithoutMatch(): boolean;
+  getDifficulty(): Difficulty;
   hasMatchAllCards(): boolean;
 }
 
@@ -24,6 +25,7 @@ export enum Difficulty {
   MEDIUM = 'medium',
   HARD = 'hard'
 }
+
 
 function getDifficultySpec(difficulty: Difficulty): DifficultyLevel {
   switch (difficulty) {
@@ -175,6 +177,9 @@ export function NewGame(game: GameData = DefaultGameData): Game {
       }
 
       return true;
+    },
+    getDifficulty(): Difficulty {
+      return game.difficulty;
     },
     hasMatchAllCards
   };
