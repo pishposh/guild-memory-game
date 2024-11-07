@@ -61,22 +61,24 @@ function App() {
           What’s this?
         </span>
 
-        {infoDialogOpen && (
-          <InfoDialog onClose={() => setInfoDialogOpen(false)} />
-        )}
         <a style={{cursor: "pointer"}} onClick={() => setGameSettingsOpen(!gameSettingsOpen)}>
           Settings
         </a>
-        {gameSettingsOpen && (
-          <GameSettings
-            onClose={() => setGameSettingsOpen(false)}
-            onSave={(difficulty) => {
-              setGame(game.resetWithDifficulty(difficulty));
-            }}
-            currentDifficulty={game.getDifficulty()}
-          />
-        )}
       </Header>
+
+      {infoDialogOpen && (
+        <InfoDialog onClose={() => setInfoDialogOpen(false)} />
+      )}
+
+      {gameSettingsOpen && (
+        <GameSettings
+          onClose={() => setGameSettingsOpen(false)}
+          onSave={(difficulty) => {
+            setGame(game.resetWithDifficulty(difficulty));
+          }}
+          currentDifficulty={game.getDifficulty()}
+        />
+      )}
 
       <div id="game-container">
         <div id="game">
