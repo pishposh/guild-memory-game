@@ -54,31 +54,30 @@ function App() {
   return (
     <>
       <Header>
-        <span
-          className="link-alike"
-          onClick={() => setInfoDialogOpen(!infoDialogOpen)}
-        >
+        <a href="https://nytimesguild.org/tech/guild-builds/">
+          More Games
+        </a>
+
+        <span className="link-alike" onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
           What’s this?
         </span>
+        {infoDialogOpen && (
+          <InfoDialog onClose={() => setInfoDialogOpen(false)} />
+        )}
 
-        <a style={{cursor: "pointer"}} onClick={() => setGameSettingsOpen(!gameSettingsOpen)}>
+        <span className="link-alike" onClick={() => setGameSettingsOpen(!gameSettingsOpen)}>
           Settings
-        </a>
+        </span>
+        {gameSettingsOpen && (
+          <GameSettings
+            onClose={() => setGameSettingsOpen(false)}
+            onSave={(difficulty) => {
+              setGame(game.resetWithDifficulty(difficulty));
+            }}
+            currentDifficulty={game.getDifficulty()}
+          />
+        )}
       </Header>
-
-      {infoDialogOpen && (
-        <InfoDialog onClose={() => setInfoDialogOpen(false)} />
-      )}
-
-      {gameSettingsOpen && (
-        <GameSettings
-          onClose={() => setGameSettingsOpen(false)}
-          onSave={(difficulty) => {
-            setGame(game.resetWithDifficulty(difficulty));
-          }}
-          currentDifficulty={game.getDifficulty()}
-        />
-      )}
 
       <div id="game-container">
         <div id="game">
