@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Card } from '../../card';
 import './PicketSign.css';
 
-export const PicketSign = ({ card }: { card: Card }) => {
+export const PicketSign = ({ card, cardIndex }: { card: Card, cardIndex: number }) => {
   const { value, isFaceUp, isMatched } = card;
 
   const [matched, setMatched] = useState(false);
@@ -40,7 +40,7 @@ export const PicketSign = ({ card }: { card: Card }) => {
             className={clsx('content')}
             src={imageSrc}
             alt={""}
-            aria-label={isFaceUp ? value : `Picket sign number`}
+            aria-label={isFaceUp ? value : `Picket sign number ${cardIndex+1}`}
             onDragStart={(e) => e.preventDefault()}
           />
         </div>

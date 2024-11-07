@@ -81,13 +81,13 @@ function App() {
 
       <div id="game-container">
         <div id="game">
-          {game.getCards().map((card) => (
+          {game.getCards().map((card, index) => (
             <div
               className="card"
               key={card.id}
               onClick={() => setGame(game.handleClick(card))}
             >
-              <PicketSign card={card} />
+              <PicketSign card={card} cardIndex={index}/>
             </div>
           ))}
         </div>
