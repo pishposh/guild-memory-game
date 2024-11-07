@@ -1,22 +1,21 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
+import { GameContext } from '../../contexts/gameContext';
 import { Dialog } from '../Dialog';
 import './ResultsDialog.css';
 
 export const ResultsDialog = ({
   onClose,
-  onReset,
-  duration,
-  counts,
-  attempts
+  onReset
 }: {
   onClose: () => void;
   onReset: () => void;
-  duration: string;
-  counts: number[];
-  attempts: number;
 }) => {
+  const { duration, counts, attempts } = useContext(GameContext);
   const squares = useMemo(
-    () => counts.map((c) => (c === 1 ? '🟩' : c === 2 ? '🟨' : '🟥')),
+    () =>
+      counts.map((c) =>
+        c === 1 ? '🟦' : c === 2 ? '🟩' : c === 3 ? '🟨' : '🟥'
+      ),
     [counts]
   );
 
@@ -50,8 +49,9 @@ export const ResultsDialog = ({
           ))}
         </div>
         <p className="square-key">
-          <span>🟩 = 1️</span>
-          <span>🟨 = 2</span>
+          <span>🟦 = 1</span>
+          <span>🟩 = 2</span>
+          <span>🟨 = 3</span>
           <span>🟥 = 3+</span>
         </p>
         <button onClick={copyResults}>Copy to Clipboard</button>

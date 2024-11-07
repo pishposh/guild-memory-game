@@ -1,24 +1,20 @@
 import { useContext, useEffect, useState } from 'react';
 import './App.css';
+import { GameSettings } from './components/GameSettings';
 import { Header } from './components/Header';
 import { InfoDialog } from './components/InfoDialog';
 import { PicketSign } from './components/PicketSign';
 import { ResultsDialog } from './components/ResultsDialog';
+import { Scoreboard } from './components/Scoreboard';
 import { GameContext } from './contexts/gameContext';
 
 function App() {
-  const {
-    score,
-    attempts,
-    counts,
-    cards,
-    hasMatchAllCards,
-    reset,
-    handleClick,
-    duration
-  } = useContext(GameContext);
+  const [gameSettingsOpen, setGameSettingsOpen] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [infoDialogOpen, setInfoDialogOpen] = useState(false);
+
+  const { cards, hasMatchAllCards, reset, handleClick } =
+    useContext(GameContext);
 
   useEffect(() => {
     let timeout: number | undefined;
@@ -35,11 +31,19 @@ function App() {
   return (
     <>
       <Header>
+        <a href="https://nytimesguild.org/tech/guild-builds/">More Games</a>
+
         <span
           className="link-alike"
           onClick={() => setInfoDialogOpen(!infoDialogOpen)}
         >
           What’s this?
+        </span>
+        <span
+          className="link-alike"
+          onClick={() => setGameSettingsOpen(!gameSettingsOpen)}
+        >
+          Settings
         </span>
       </Header>
 
@@ -56,35 +60,21 @@ function App() {
           ))}
         </div>
       </div>
-      <div className="scoreboard-container">
-        <div className="scoreboard">
-          <p className="time">
-            <strong>Time spent:</strong> {duration}
-          </p>
-          <div className="row">
-            <p className="attempts">
-              <strong>Picket signs flipped:</strong> {attempts}
-            </p>
-            <p className="score">
-              <strong>Matches:</strong> {score}
-            </p>
-          </div>
-        </div>
-      </div>
+      <Scoreboard />
       {showDialog && (
         <ResultsDialog
-          counts={counts}
-          attempts={attempts}
           onClose={() => setShowDialog(false)}
           onReset={() => {
             setShowDialog(false);
             reset();
           }}
-          duration={duration}
         />
       )}
       {infoDialogOpen && (
         <InfoDialog onClose={() => setInfoDialogOpen(false)} />
+      )}
+      {gameSettingsOpen && (
+        <GameSettings onClose={() => setGameSettingsOpen(false)} />
       )}
     </>
   );

@@ -9,7 +9,6 @@ export const Header = ({ children }: PropsWithChildren) => (
         <b>Match Strike</b>
       </div>
       <div className="header-links">
-        <a href="https://nytimesguild.org/tech/guild-builds/">More Games</a>
         {children}
       </div>
     </div>

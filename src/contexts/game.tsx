@@ -6,7 +6,7 @@ import {
   useState
 } from 'react';
 import { Card, getInitialCards } from '../card';
-import { GameContext } from './gameContext';
+import { Difficulty, DifficultyLevel, GameContext } from './gameContext';
 
 const hasTwoMatchingCards = (cards: Card[]) => {
   const [one, two] = cards;
@@ -16,14 +16,26 @@ const hasTwoMatchingCards = (cards: Card[]) => {
 const getFaceUp = (cards: Card[]) =>
   cards.filter((c) => c.isFaceUp && !c.isMatched);
 
-export const GameProvider = ({ children }: PropsWithChildren) => {
+const DifficultySpec: Record<Difficulty, DifficultyLevel> = {
+  [Difficulty.EASY]: { numCards: 2, matchLength: 2 },
+  [Difficulty.MEDIUM]: { numCards: 4, matchLength: 2 },
+  [Difficulty.HARD]: { numCards: 8, matchLength: 2 }
+};
+
+export const GameProvider = ({
+  children
+}: PropsWithChildren & { level: DifficultyLevel }) => {
+  const [difficulty, setDifficulty] = useState(Difficulty.HARD);
   const [start, setStart] = useState<Date | null>(null);
   const [end, setEnd] = useState<Date | null>(null);
   const [duration, setDuration] = useState('0m 0s');
   const [attempts, setAttempts] = useState(0);
-  const [cards, setCards] = useState(getInitialCards());
+  const [cards, setCards] = useState(
+    getInitialCards(DifficultySpec.hard.numCards)
+  );
 
   // computed values
+  const level = useMemo(() => DifficultySpec[difficulty], [difficulty]);
   const faceUpCards = useMemo(() => getFaceUp(cards), [cards]);
   const hasFlippedTwoCards = useMemo(
     () => faceUpCards.length >= 2,
@@ -51,16 +63,12 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     if (start === null) {
       return '0m 0s';
     }
-
     const newEnd = end === null ? new Date() : end;
-
     const diff = newEnd.getTime() - start.getTime();
     const totalSeconds = Math.floor(diff / 1000);
-
     // Calculate minutes and remaining seconds
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-
     return `${minutes}m ${seconds}s`;
   }, [start, end]);
 
@@ -73,7 +81,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         return;
       }
       setAttempts((prev) => prev + 1);
-
       setCards((oldCards) => {
         let updatedCards = oldCards.map((c) =>
           c.id === card.id ? { ...c, isFaceUp: true, count: c.count + 1 } : c
@@ -94,8 +101,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setStart(null);
     setEnd(null);
     setAttempts(0);
-    setCards(getInitialCards());
-  }, [setStart, setEnd, setAttempts, setCards]);
+    setCards(getInitialCards(level.numCards));
+  }, [level.numCards]);
 
   // side effects
   useEffect(() => {
@@ -128,6 +135,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     };
   }, [hasFlippedTwoCardsWithoutMatch, resetUnmatchedCards]);
 
+  useEffect(() => {
+    reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [difficulty]);
+
   return (
     <GameContext.Provider
       value={{
@@ -138,7 +150,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         reset,
         cards,
         handleClick,
-        duration
+        duration,
+        setDifficulty,
+        difficulty
       }}
     >
       {children}
