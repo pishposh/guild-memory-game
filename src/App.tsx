@@ -3,6 +3,7 @@ import './App.css';
 import { Header } from './components/Header';
 import { InfoDialog } from './components/InfoDialog';
 import { PicketSign } from './components/PicketSign';
+import { GameSettings } from './components/GameSettings';
 import { ResultsDialog } from './components/ResultsDialog';
 import { Scoreboard } from './components/Scoreboard';
 import { Game, NewGame } from './game';
@@ -10,6 +11,7 @@ import { Game, NewGame } from './game';
 function App() {
   const [game, setGame] = useState<Game>(NewGame());
   const [duration, setDuration] = useState('0m 0s');
+  const [gameSettingsOpen, setGameSettingsOpen] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [infoDialogOpen, setInfoDialogOpen] = useState(false);
 
@@ -58,6 +60,22 @@ function App() {
         >
           What’s this?
         </span>
+
+        {infoDialogOpen && (
+          <InfoDialog onClose={() => setInfoDialogOpen(false)} />
+        )}
+        <a style={{cursor: "pointer"}} onClick={() => setGameSettingsOpen(!gameSettingsOpen)}>
+          Settings
+        </a>
+        {gameSettingsOpen && (
+          <GameSettings
+          onClose={() => setGameSettingsOpen(false)}
+          onSave={(difficulty) => {
+            //Reset the game with the new difficulty
+            setGame(game.resetWithDifficulty(difficulty))
+          }}
+        />
+        )}
       </Header>
 
       <div id="game-container">

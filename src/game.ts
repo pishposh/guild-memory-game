@@ -4,6 +4,7 @@ export interface Game {
   handleClick(card: Card): Game;
   resetUnmatchedCards(): Game;
   reset(): Game;
+  resetWithDifficulty(difficulty: Difficulty): Game;
   getDuration(): string;
   getScore(): number;
   getAttempts(): number;
@@ -13,12 +14,35 @@ export interface Game {
   hasMatchAllCards(): boolean;
 }
 
+interface DifficultyLevel {
+  numCards: number,
+  matchLength: number,
+}
+
+export enum Difficulty {
+  EASY = 'easy',
+  MEDIUM = 'medium',
+  HARD = 'hard'
+}
+
+function getDifficultySpec(difficulty: Difficulty): DifficultyLevel {
+  switch (difficulty) {
+    case Difficulty.EASY:
+      return { numCards: 2, matchLength: 2 };
+    case Difficulty.MEDIUM:
+      return { numCards: 4, matchLength: 2 };
+    case Difficulty.HARD:
+      return { numCards: 8, matchLength: 2 };
+  }
+}
+
 interface GameData {
   start: Date | null;
   end: Date | null;
   score: number;
   attempts: number;
   cards: Card[];
+  difficulty: Difficulty;
 }
 
 const DefaultGameData = {
@@ -26,10 +50,13 @@ const DefaultGameData = {
   end: null,
   score: 0,
   attempts: 0,
-  cards: getInitialCards()
-};
+  cards: getInitialCards(getDifficultySpec(Difficulty.HARD).numCards),
+  difficulty: Difficulty.HARD
+}
+
 
 export function NewGame(game: GameData = DefaultGameData): Game {
+
   function getFaceUpCards(cards = game.cards): Card[] {
     return cards.filter((c) => c.isFaceUp && !c.isMatched);
   }
@@ -54,8 +81,19 @@ export function NewGame(game: GameData = DefaultGameData): Game {
         end: null,
         score: 0,
         attempts: 0,
-        cards: getInitialCards()
-      });
+        cards: getInitialCards(getDifficultySpec(game.difficulty).numCards),
+        difficulty: game.difficulty
+      })
+    },
+    resetWithDifficulty(difficulty: Difficulty): Game {
+      return NewGame({
+        start: null,
+        end: null,
+        score: 0,
+        attempts: 0,
+        cards: getInitialCards(getDifficultySpec(difficulty).numCards),
+        difficulty: difficulty
+      })
     },
     handleClick(card: Card): Game {
       if (card.isFaceUp || card.isMatched || hasFlippedTwoCards()) {
@@ -92,14 +130,12 @@ export function NewGame(game: GameData = DefaultGameData): Game {
     resetUnmatchedCards(): Game {
       return NewGame({
         ...game,
-        cards: game.cards.map((c) =>
-          c.isMatched ? c : { ...c, isFaceUp: false }
-        )
+        cards: game.cards.map((c) => c.isMatched ? c : ({ ...c, isFaceUp: false })),
       });
     },
     getDuration(): string {
       if (game.start === null) {
-        return '0m 0s';
+        return "0m 0s";
       }
 
       let end = new Date();
