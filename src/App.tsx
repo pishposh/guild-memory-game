@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { Header } from './components/Header';
+import { InfoDialog } from './components/InfoDialog';
 import { PicketSign } from './components/PicketSign';
 import { GameSettings } from './components/GameSettings';
 import { ResultsDialog } from './components/ResultsDialog';
-import { InfoDialog } from './components/InfoDialog';
+import { Scoreboard } from './components/Scoreboard';
 import { Game, NewGame } from './game';
 
 function App() {
@@ -51,13 +53,14 @@ function App() {
 
   return (
     <>
-      <div id="header">
-        <a href="https://nytimesguild.org/tech/">
-          More Games
-        </a>
-        <a style={{cursor: "pointer"}} onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
+      <Header>
+        <span
+          className="link-alike"
+          onClick={() => setInfoDialogOpen(!infoDialogOpen)}
+        >
           What’s this?
-        </a>
+        </span>
+
         {infoDialogOpen && (
           <InfoDialog onClose={() => setInfoDialogOpen(false)} />
         )}
@@ -73,7 +76,8 @@ function App() {
           }}
         />
         )}
-      </div>
+      </Header>
+
       <div id="game-container">
         <div id="game">
           {game.getCards().map((card) => (
@@ -87,21 +91,7 @@ function App() {
           ))}
         </div>
       </div>
-      <div className="scoreboard-container">
-        <div className="scoreboard">
-          <p className="time">
-            <strong>Time spent:</strong> {duration}
-          </p>
-          <div className="row">
-            <p className="attempts">
-              <strong>Picket signs flipped:</strong> {game.getAttempts()}
-            </p>
-            <p className="score">
-              <strong>Matches:</strong> {game.getScore()}
-            </p>
-          </div>
-        </div>
-      </div>
+      <Scoreboard game={game} duration={duration} />
       {showDialog && (
         <ResultsDialog
           game={game}
@@ -112,6 +102,9 @@ function App() {
           }}
           duration={duration}
         />
+      )}
+      {infoDialogOpen && (
+        <InfoDialog onClose={() => setInfoDialogOpen(false)} />
       )}
     </>
   );

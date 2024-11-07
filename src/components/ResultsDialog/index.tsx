@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { Game } from '../../game';
+import { Dialog } from '../Dialog';
 import './ResultsDialog.css';
 
 export const ResultsDialog = ({
@@ -14,7 +15,10 @@ export const ResultsDialog = ({
   game: Game;
 }) => {
   const squares = useMemo(
-    () => game.getCounts().map((c) => (c === 1 ? '🟩' : c === 2 ? '🟨' : '🟥')),
+    () =>
+      game
+        .getCounts()
+        .map((c) => (c === 1 ? '🟦' : c === 2 ? '🟩' : c === 3 ? '🟨' : '🟥')),
     [game]
   );
 
@@ -32,11 +36,8 @@ export const ResultsDialog = ({
     [resultString]
   );
   return (
-    <dialog className="dialog">
-      <span className="close-button" onClick={onClose}>
-        ❌
-      </span>
-      <div className="container">
+    <Dialog onClose={onClose} centerX centerY>
+      <div className="results-container">
         <h1>You ratified a contract!</h1>
         <p className="time">
           <strong>Time spent:</strong> {duration}
@@ -50,11 +51,17 @@ export const ResultsDialog = ({
             <span>{square}</span>
           ))}
         </div>
+        <p className="square-key">
+          <span>🟦 = 1</span>
+          <span>🟩 = 2</span>
+          <span>🟨 = 3</span>
+          <span>🟥 = 3+</span>
+        </p>
         <button onClick={copyResults}>Copy to Clipboard</button>
         <button type="button" onClick={onReset}>
           Play Again
         </button>
       </div>
-    </dialog>
+    </Dialog>
   );
 };
