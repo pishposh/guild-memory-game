@@ -6,6 +6,7 @@ import { InfoDialog } from './components/InfoDialog';
 import { PicketSign } from './components/PicketSign';
 import { ResultsDialog } from './components/ResultsDialog';
 import { Scoreboard } from './components/Scoreboard';
+import { TextOrIcon } from './components/TextOrIcon';
 import { Game, NewGame } from './game';
 
 function App() {
@@ -54,20 +55,16 @@ function App() {
   return (
     <>
       <Header>
-        <a href="https://nytimesguild.org/tech/guild-builds/">More Games</a>
+        <a href="https://nytimesguild.org/tech/guild-builds/">
+          <TextOrIcon icon="👾" text="More Games" />
+        </a>
 
-        <span
-          className="link-alike"
-          onClick={() => setInfoDialogOpen(!infoDialogOpen)}
-        >
-          What’s this?
-        </span>
-        <span
-          className="link-alike"
-          onClick={() => setGameSettingsOpen(!gameSettingsOpen)}
-        >
-          Settings
-        </span>
+        <button onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
+          <TextOrIcon icon="❓" text="What's this?" />
+        </button>
+        <button onClick={() => setGameSettingsOpen(!gameSettingsOpen)}>
+          <TextOrIcon icon="⚙️" text="Settings" />
+        </button>
         {gameSettingsOpen && (
           <GameSettings
             onClose={() => setGameSettingsOpen(false)}
