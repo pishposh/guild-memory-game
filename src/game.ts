@@ -50,8 +50,8 @@ const DefaultGameData = {
   end: null,
   score: 0,
   attempts: 0,
-  cards: getInitialCards(getDifficultySpec(Difficulty.EASY).numCards),
-  difficulty: Difficulty.EASY
+  cards: getInitialCards(getDifficultySpec(Difficulty.HARD).numCards),
+  difficulty: Difficulty.HARD
 }
 
 
