@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { GameSettings } from './components/GameSettings';
 import { Header } from './components/Header';
 import { InfoDialog } from './components/InfoDialog';
 import { PicketSign } from './components/PicketSign';
-import { GameSettings } from './components/GameSettings';
 import { ResultsDialog } from './components/ResultsDialog';
 import { Scoreboard } from './components/Scoreboard';
 import { Game, NewGame } from './game';
@@ -54,18 +54,18 @@ function App() {
   return (
     <>
       <Header>
-        <a href="https://nytimesguild.org/tech/guild-builds/">
-          More Games
-        </a>
+        <a href="https://nytimesguild.org/tech/guild-builds/">More Games</a>
 
-        <span className="link-alike" onClick={() => setInfoDialogOpen(!infoDialogOpen)}>
+        <span
+          className="link-alike"
+          onClick={() => setInfoDialogOpen(!infoDialogOpen)}
+        >
           What’s this?
         </span>
-        {infoDialogOpen && (
-          <InfoDialog onClose={() => setInfoDialogOpen(false)} />
-        )}
-
-        <span className="link-alike" onClick={() => setGameSettingsOpen(!gameSettingsOpen)}>
+        <span
+          className="link-alike"
+          onClick={() => setGameSettingsOpen(!gameSettingsOpen)}
+        >
           Settings
         </span>
         {gameSettingsOpen && (
