@@ -103,3 +103,7 @@ div#game {
 .summary button {
   margin-top: 1rem;
 }
+
+body {
+  background-color: var(--background-color);
+}

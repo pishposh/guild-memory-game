@@ -1,12 +1,12 @@
 enum SignContent {
-    ContractSpellingBee = 'contract-spelling-bee.webp',
-    GuildRound = 'guild-logo-round.webp',
-    GuildSquare = 'guild-logo-square.webp',
-    JustCauseWordle = 'just-cause-wordle.webp',
-    MakerWeekGuild = 'maker-week-guild.webp',
-    UnionMadeGithub = 'union-made-github.webp',
-    WuerkerCartoon = 'wuerker-cartoon.webp',
-    ContractCrossword = 'contract-crossword.webp'
+    ContractSpellingBee = 'spelling-bee-answer-contract',
+    GuildRound = 'round-tech-guild-logo',
+    GuildSquare = 'square-tech-guild-logo',
+    JustCauseWordle = 'wordle-answer-cause',
+    MakerWeekGuild = 'scabby-the-rat',
+    UnionMadeGithub = 'union-made-code',
+    WuerkerCartoon = 'sad-AG',
+    ContractCrossword = 'crossword-answer-contract'
 }
 
 export interface Card {

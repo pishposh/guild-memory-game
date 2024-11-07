@@ -14,7 +14,7 @@ export const PicketSign = ({ card }: { card: Card }) => {
     }
   }, [isMatched]);
 
-  const imageSrc = useMemo(() => `assets/sign-content/${value}`, [value]);
+  const imageSrc = useMemo(() => `assets/sign-content/${value}.webp`, [value]);
 
   return (
     <button className={clsx('container', isFaceUp ? 'face-up' : 'face-down')}>
@@ -39,7 +39,8 @@ export const PicketSign = ({ card }: { card: Card }) => {
           <img
             className={clsx('content')}
             src={imageSrc}
-            alt={value}
+            alt={""}
+            aria-label={isFaceUp ? value : `Picket sign number`}
             onDragStart={(e) => e.preventDefault()}
           />
         </div>
