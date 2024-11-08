@@ -1,17 +1,17 @@
-import { useContext } from 'react';
-import { Difficulty, GameContext } from '../../contexts/gameContext';
-import { Dialog } from '../Dialog';
-import './GameSettings.css';
+import { Difficulty } from '../../contexts/gameContext'
+import { Dialog } from '../Dialog'
+import { useGameState } from '../hooks/useGameState'
+import './GameSettings.css'
 
 export const GameSettings = ({ onClose }: { onClose: () => void }) => {
-  const { difficulty, setDifficulty } = useContext(GameContext);
+  const { difficulty, setDifficulty } = useGameState()
 
   const handleChangeDifficulty = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    const newValue = event.target.value;
-    setDifficulty(newValue as Difficulty);
-  };
+    const newValue = event.target.value
+    setDifficulty(newValue as Difficulty)
+  }
 
   return (
     <Dialog centerX centerY onClose={onClose}>
@@ -32,12 +32,12 @@ export const GameSettings = ({ onClose }: { onClose: () => void }) => {
         <button
           className="button"
           onClick={() => {
-            onClose();
+            onClose()
           }}
         >
           Let's Play!
         </button>
       </div>
     </Dialog>
-  );
-};
+  )
+}

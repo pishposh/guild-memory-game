@@ -1,6 +1,6 @@
-import { useCallback, useContext, useMemo } from 'react'
-import { GameContext } from '../../contexts/gameContext'
+import { useCallback, useMemo } from 'react'
 import { Dialog } from '../Dialog'
+import { useGameState } from '../hooks/useGameState'
 import './ResultsDialog.css'
 
 export const ResultsDialog = ({
@@ -10,7 +10,7 @@ export const ResultsDialog = ({
   onClose: () => void
   onReset: () => void
 }) => {
-  const { duration, counts, attempts } = useContext(GameContext)
+  const { duration, counts, attempts } = useGameState()
   const squares = useMemo(
     () =>
       counts.map((c) =>

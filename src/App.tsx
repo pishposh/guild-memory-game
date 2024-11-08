@@ -1,33 +1,32 @@
-import { useContext, useEffect, useState } from 'react';
-import './App.css';
-import { GameSettings } from './components/GameSettings';
-import { Header } from './components/Header';
-import { InfoDialog } from './components/InfoDialog';
-import { PicketSign } from './components/PicketSign';
-import { ResultsDialog } from './components/ResultsDialog';
-import { Scoreboard } from './components/Scoreboard';
-import { TextOrIcon } from './components/TextOrIcon';
-import { GameContext } from './contexts/gameContext';
+import { useEffect, useState } from 'react'
+import './App.css'
+import { GameSettings } from './components/GameSettings'
+import { Header } from './components/Header'
+import { useGameState } from './components/hooks/useGameState'
+import { InfoDialog } from './components/InfoDialog'
+import { PicketSign } from './components/PicketSign'
+import { ResultsDialog } from './components/ResultsDialog'
+import { Scoreboard } from './components/Scoreboard'
+import { TextOrIcon } from './components/TextOrIcon'
 
 function App() {
-  const [gameSettingsOpen, setGameSettingsOpen] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
-  const [infoDialogOpen, setInfoDialogOpen] = useState(false);
+  const [gameSettingsOpen, setGameSettingsOpen] = useState(false)
+  const [showDialog, setShowDialog] = useState(false)
+  const [infoDialogOpen, setInfoDialogOpen] = useState(false)
 
-  const { cards, hasMatchAllCards, reset, handleClick } =
-    useContext(GameContext);
+  const { cards, hasMatchAllCards, reset, handleClick } = useGameState()
 
   useEffect(() => {
-    let timeout: number | undefined;
+    let timeout: number | undefined
     if (hasMatchAllCards) {
-      timeout = setTimeout(() => setShowDialog(true), 1200);
+      timeout = setTimeout(() => setShowDialog(true), 1200)
     }
     return () => {
       if (timeout) {
-        clearTimeout(timeout);
+        clearTimeout(timeout)
       }
-    };
-  }, [hasMatchAllCards]);
+    }
+  }, [hasMatchAllCards])
 
   return (
     <>
@@ -65,8 +64,8 @@ function App() {
         <ResultsDialog
           onClose={() => setShowDialog(false)}
           onReset={() => {
-            setShowDialog(false);
-            reset();
+            setShowDialog(false)
+            reset()
           }}
         />
       )}
@@ -77,7 +76,7 @@ function App() {
         <GameSettings onClose={() => setGameSettingsOpen(false)} />
       )}
     </>
-  );
+  )
 }
 
-export default App;
+export default App

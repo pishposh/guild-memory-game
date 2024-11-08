@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import { GameContext } from '../../contexts/gameContext';
-import './Scoreboard.css';
+import { useGameState } from '../hooks/useGameState'
+import './Scoreboard.css'
 
 export const Scoreboard = () => {
-  const { duration, score, attempts } = useContext(GameContext);
+  const { duration, score, attempts } = useGameState()
   return (
     <div className="scoreboard-container">
       <div className="scoreboard">
@@ -20,5 +19,5 @@ export const Scoreboard = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
