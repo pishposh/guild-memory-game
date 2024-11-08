@@ -1,37 +1,37 @@
-import { useCallback, useContext, useMemo } from 'react';
-import { GameContext } from '../../contexts/gameContext';
-import { Dialog } from '../Dialog';
-import './ResultsDialog.css';
+import { useCallback, useContext, useMemo } from 'react'
+import { GameContext } from '../../contexts/gameContext'
+import { Dialog } from '../Dialog'
+import './ResultsDialog.css'
 
 export const ResultsDialog = ({
   onClose,
-  onReset
+  onReset,
 }: {
-  onClose: () => void;
-  onReset: () => void;
+  onClose: () => void
+  onReset: () => void
 }) => {
-  const { duration, counts, attempts } = useContext(GameContext);
+  const { duration, counts, attempts } = useContext(GameContext)
   const squares = useMemo(
     () =>
       counts.map((c) =>
-        c === 1 ? '🟦' : c === 2 ? '🟩' : c === 3 ? '🟨' : '🟥'
+        c === 1 ? '🟦' : c === 2 ? '🟩' : c === 3 ? '🟨' : '🟥',
       ),
-    [counts]
-  );
+    [counts],
+  )
 
   const resultString = useMemo(() => {
-    const result: string[] = [];
+    const result: string[] = []
     squares.forEach((s, idx) => {
-      result.push(s);
-      result.push((idx + 1) % 4 === 0 ? '\n' : ' ');
-    });
-    return result.join('');
-  }, [squares]);
+      result.push(s)
+      result.push((idx + 1) % 4 === 0 ? '\n' : ' ')
+    })
+    return result.join('')
+  }, [squares])
 
   const copyResults = useCallback(
     () => navigator.clipboard.writeText(resultString),
-    [resultString]
-  );
+    [resultString],
+  )
   return (
     <Dialog onClose={onClose} centerX centerY>
       <div className="results-container">
@@ -43,16 +43,16 @@ export const ResultsDialog = ({
           <strong>Picket signs flipped:</strong> {attempts}
         </p>
 
-        <div className="board">
+        <div className="emoji-board">
           {squares.map((square) => (
             <span>{square}</span>
           ))}
         </div>
         <p className="square-key">
-          <span>🟦 = 1</span>
-          <span>🟩 = 2</span>
-          <span>🟨 = 3</span>
-          <span>🟥 = 3+</span>
+          <span>🟦 → 1</span>
+          <span>🟩 → 2</span>
+          <span>🟨 → 3</span>
+          <span>🟥 → 4+</span>
         </p>
         <button onClick={copyResults}>Copy to Clipboard</button>
         <button type="button" onClick={onReset}>
@@ -60,5 +60,5 @@ export const ResultsDialog = ({
         </button>
       </div>
     </Dialog>
-  );
-};
+  )
+}
