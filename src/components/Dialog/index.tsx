@@ -1,32 +1,32 @@
-import clsx from 'clsx';
-import { PropsWithChildren, useCallback, useEffect } from 'react';
-import './Dialog.css';
+import clsx from 'clsx'
+import { PropsWithChildren, useCallback, useEffect } from 'react'
+import './Dialog.css'
 
 export const Dialog = ({
   onClose,
   centerX = false,
   centerY = false,
-  children
+  children,
 }: PropsWithChildren & {
-  onClose: () => void;
-  centerX?: boolean;
-  centerY?: boolean;
+  onClose: () => void
+  centerX?: boolean
+  centerY?: boolean
 }) => {
   const closeOnEsc = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        onClose()
       }
     },
-    [onClose]
-  );
+    [onClose],
+  )
   useEffect(() => {
-    document.addEventListener('keydown', closeOnEsc, false);
+    document.addEventListener('keydown', closeOnEsc, false)
 
     return () => {
-      document.removeEventListener('keydown', closeOnEsc, false);
-    };
-  }, [closeOnEsc]);
+      document.removeEventListener('keydown', closeOnEsc, false)
+    }
+  }, [closeOnEsc])
 
   return (
     <dialog
@@ -37,5 +37,5 @@ export const Dialog = ({
       </span>
       {children}
     </dialog>
-  );
-};
+  )
+}

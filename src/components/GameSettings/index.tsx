@@ -1,50 +1,43 @@
-import { useState, useEffect } from 'react';
-import { Dialog } from '../Dialog';
-import { Difficulty } from '../../game';
-import './GameSettings.css';
+import { Difficulty } from '../../contexts/gameContext'
+import { Dialog } from '../Dialog'
+import { useGameState } from '../hooks/useGameState'
+import './GameSettings.css'
 
-export const GameSettings = ({
-  onClose,
-  onSave,
-  currentDifficulty,
-}: {
-  onClose: () => void;
-  onSave: (difficulty: Difficulty) => void;
-  currentDifficulty: Difficulty;
-}) => {
+export const GameSettings = ({ onClose }: { onClose: () => void }) => {
+  const { difficulty, setDifficulty } = useGameState()
 
-  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>(Difficulty.EASY);
-
-  useEffect(() => {
-    setSelectedDifficulty(currentDifficulty);
-  }, [currentDifficulty]);
-
-  const handleChangeDifficulty = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newValue = event.target.value;
-    setSelectedDifficulty(newValue as Difficulty);
-  };
+  const handleChangeDifficulty = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const newValue = event.target.value
+    setDifficulty(newValue as Difficulty)
+  }
 
   return (
-    <Dialog onClose={onClose} centerX centerY>
+    <Dialog centerX centerY onClose={onClose}>
       <div className="settings-container">
-
         <label>Choose your difficulty:</label>
 
-        <select name="difficulty" id="difficulty" value={selectedDifficulty} onChange={handleChangeDifficulty}>
-        <option value={Difficulty.EASY}>Easy</option>
-        <option value={Difficulty.MEDIUM}>Medium</option>
-        <option value={Difficulty.HARD}>Hard</option>
+        <select
+          name="difficulty"
+          id="difficulty"
+          value={difficulty}
+          onChange={handleChangeDifficulty}
+        >
+          <option value={Difficulty.EASY}>Easy</option>
+          <option value={Difficulty.MEDIUM}>Medium</option>
+          <option value={Difficulty.HARD}>Hard</option>
         </select>
 
-        <button className="button"
+        <button
+          className="button"
           onClick={() => {
-            onSave(selectedDifficulty);
-            onClose();
+            onClose()
           }}
-          >
+        >
           Let's Play!
         </button>
       </div>
     </Dialog>
-  );
-};
+  )
+}
