@@ -1,25 +1,25 @@
-enum SignContent {
-  ContractSpellingBee = 'contract-spelling-bee',
-  GuildRound = 'guild-logo-round',
-  GuildSquare = 'guild-logo-square',
-  JustCauseWordle = 'just-cause-wordle',
-  MakerWeekGuild = 'maker-week-guild',
-  UnionMadeGithub = 'union-made-github',
-  WuerkerCartoon = 'wuerker-cartoon',
-  ContractCrossword = 'contract-crossword',
-  DontPlayGames = 'dontplaygames-socialstrike',
-  MooDeng = 'moo-deng',
-  Scabby = 'scabby',
-  StandWithGuild = 'stand-with-guild-avatar',
-  TechSupport = 'tech-support-avatar',
-  TickTock = 'tick-tock-avatar',
-  UnionFist = 'union-fist',
-  ReadyToStrike = 'ready-to-strike_text-only-avatar',
-}
+const SignContent = [
+  'crossword-answer-contract',
+  'dontplaygames-socialstrike',
+  'moo-deng',
+  'ready-to-strike',
+  'round-tech-guild-logo',
+  'sad-AG',
+  'scabby-inflatable',
+  'scabby-the-rat-logo',
+  'spelling-bee-answer-contract',
+  'square-tech-guild-logo',
+  'stand-with-the-guild',
+  'tech-support',
+  'tick-tock-rat',
+  'union-fist',
+  'union-made-guild-logo',
+  'wordle-answer-cause',
+] as const
 
 export interface Card {
   id: string
-  value: SignContent
+  value: (typeof SignContent)[number]
   isFaceUp: boolean
   isMatched: boolean
   count: number
@@ -27,7 +27,7 @@ export interface Card {
 
 export function getInitialCards(countCardsInPlay: number): Card[] {
   const date = new Date().toISOString()
-  let cardValues = Object.values(SignContent)
+  let cardValues = [...SignContent]
   shuffleArray(cardValues)
   cardValues = cardValues.slice(0, countCardsInPlay)
 
