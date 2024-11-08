@@ -109,7 +109,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setCards(getInitialCards(spec.numCards));
   }, [spec.numCards]);
 
-  // side effects
+  // ****************
+  // * side effects *
+  // ****************
   useEffect(() => {
     if (end === null && hasMatchAllCards) {
       setEnd(new Date());
