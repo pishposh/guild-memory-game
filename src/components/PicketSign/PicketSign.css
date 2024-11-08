@@ -3,10 +3,10 @@
   --content-size: 100%;
 }
 
-button {
+button.picket-sign-button {
   background-color: inherit;
   padding: 0;
-  border: none
+  border: none;
 }
 
 .container {

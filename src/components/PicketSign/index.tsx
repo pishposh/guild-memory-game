@@ -1,23 +1,35 @@
-import clsx from 'clsx';
-import { useEffect, useMemo, useState } from 'react';
-import { Card } from '../../card';
-import './PicketSign.css';
+import clsx from 'clsx'
+import { useEffect, useMemo, useState } from 'react'
+import { Card } from '../../card'
+import './PicketSign.css'
 
-export const PicketSign = ({ card, cardIndex }: { card: Card, cardIndex: number }) => {
-  const { value, isFaceUp, isMatched } = card;
+export const PicketSign = ({
+  card,
+  cardIndex,
+}: {
+  card: Card
+  cardIndex: number
+}) => {
+  const { value, isFaceUp, isMatched } = card
 
-  const [matched, setMatched] = useState(false);
+  const [matched, setMatched] = useState(false)
 
   useEffect(() => {
     if (isMatched) {
-      setTimeout(() => setMatched(true), 500);
+      setTimeout(() => setMatched(true), 500)
     }
-  }, [isMatched]);
+  }, [isMatched])
 
-  const imageSrc = useMemo(() => `assets/sign-content/${value}.webp`, [value]);
+  const imageSrc = useMemo(() => `assets/sign-content/${value}.webp`, [value])
 
   return (
-    <button className={clsx('container', isFaceUp ? 'face-up' : 'face-down')}>
+    <button
+      className={clsx(
+        'picket-sign-button',
+        'container',
+        isFaceUp ? 'face-up' : 'face-down',
+      )}
+    >
       {!matched && (
         // Back of sign
         <div className="back-container">
@@ -28,7 +40,7 @@ export const PicketSign = ({ card, cardIndex }: { card: Card, cardIndex: number 
           />
         </div>
       )}
-       {/* Front of sign  */}
+      {/* Front of sign  */}
       <div className={clsx('front-container', matched && 'matched')}>
         <img
           className="sign-image"
@@ -39,12 +51,14 @@ export const PicketSign = ({ card, cardIndex }: { card: Card, cardIndex: number 
           <img
             className={clsx('content')}
             src={imageSrc}
-            alt={""}
-            aria-label={isFaceUp ? value : `Picket sign number ${cardIndex+1}`}
+            alt={''}
+            aria-label={
+              isFaceUp ? value : `Picket sign number ${cardIndex + 1}`
+            }
             onDragStart={(e) => e.preventDefault()}
           />
         </div>
       </div>
     </button>
-  );
-};
+  )
+}
