@@ -1,8 +1,8 @@
-.board {
+.emoji-board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;
-  column-gap: 20px;
+  column-gap: 15px;
   font-size: large;
 }
 
