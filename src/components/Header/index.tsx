@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react';
-import './Header.css';
+import { PropsWithChildren } from 'react'
+import './Header.css'
 
 export const Header = ({ children }: PropsWithChildren) => (
   <header id="header">
@@ -11,4 +11,4 @@ export const Header = ({ children }: PropsWithChildren) => (
       <div className="header-links">{children}</div>
     </div>
   </header>
-);
+)

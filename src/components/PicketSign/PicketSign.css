@@ -3,6 +3,12 @@
   --content-size: 100%;
 }
 
+button.picket-sign-button {
+  background-color: inherit;
+  padding: 0;
+  border: none;
+}
+
 .container {
   height: var(--sign-size);
   width: var(--sign-size);
@@ -31,6 +37,7 @@
 .back-container {
   backface-visibility: hidden;
   position: absolute;
+  top: 0;
   height: 100%;
   width: 100%;
 }

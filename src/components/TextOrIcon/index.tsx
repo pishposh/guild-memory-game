@@ -1,4 +1,4 @@
-import './TextOrIcon.css';
+import './TextOrIcon.css'
 
 export const TextOrIcon = ({ text, icon }: { text: string; icon: string }) => (
   <>
@@ -9,4 +9,4 @@ export const TextOrIcon = ({ text, icon }: { text: string; icon: string }) => (
       {icon}
     </span>
   </>
-);
+)
